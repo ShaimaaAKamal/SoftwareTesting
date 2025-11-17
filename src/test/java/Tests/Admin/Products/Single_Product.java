@@ -1,4 +1,6 @@
 package Tests.Admin.Products;
 
-public class Single_Product {
+import Tests.BaseTest;
+
+public class Single_Product extends BaseTest {
 }

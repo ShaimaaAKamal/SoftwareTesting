@@ -1,4 +1,6 @@
 package Tests.Admin.Orders;
 
-public class Orders {
+import Tests.BaseTest;
+
+public class Orders extends BaseTest {
 }

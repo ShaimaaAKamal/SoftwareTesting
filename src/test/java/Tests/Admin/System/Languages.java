@@ -1,4 +1,6 @@
 package Tests.Admin.System;
 
-public class Languages {
+import Tests.BaseTest;
+
+public class Languages extends BaseTest {
 }

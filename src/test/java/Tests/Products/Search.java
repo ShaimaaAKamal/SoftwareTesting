@@ -1,4 +1,6 @@
 package Tests.Products;
 
-public class Search {
+import Tests.BaseTest;
+
+public class Search extends BaseTest {
 }

@@ -1,4 +1,6 @@
 package Tests.Auth;
 
-public class Login {
+import Tests.BaseTest;
+
+public class Login extends BaseTest {
 }

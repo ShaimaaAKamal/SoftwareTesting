@@ -1,4 +1,4 @@
 package Tests;
 
-public class Home {
+public class Home extends BaseTest{
 }

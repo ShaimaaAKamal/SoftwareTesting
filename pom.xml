@@ -26,6 +26,11 @@
             <version>7.11.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>2.3.1</version>
+        </dependency>
     </dependencies>
 
 </project>

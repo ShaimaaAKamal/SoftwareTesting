@@ -1,4 +1,6 @@
 package Tests.Products;
 
-public class Product_List {
+import Tests.BaseTest;
+
+public class Product_List extends BaseTest {
 }

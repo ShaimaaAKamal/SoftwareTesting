@@ -1,4 +1,4 @@
 package Tests;
 
-public class Wishlist {
+public class Wishlist extends BaseTest{
 }

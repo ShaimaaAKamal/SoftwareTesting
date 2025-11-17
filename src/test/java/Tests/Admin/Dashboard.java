@@ -1,4 +1,6 @@
 package Tests.Admin;
 
-public class Dashboard {
+import Tests.BaseTest;
+
+public class Dashboard extends BaseTest {
 }
