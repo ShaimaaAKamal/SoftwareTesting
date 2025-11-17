@@ -4,6 +4,7 @@ import net.datafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class Register_Page {
     WebDriver driver;
@@ -57,4 +58,31 @@ public class Register_Page {
         return faker.internet().emailAddress();
     }
 
+    public void asserTFirstNameError(){
+        Assert.assertTrue(driver.findElement(By.id("error-firstname")).isDisplayed());
+    }
+    public void asserTLasttNameError(){
+        Assert.assertTrue(driver.findElement(By.id("error-lastname")).isDisplayed());
+    }
+    public void asserTEmailError(){
+        Assert.assertTrue(driver.findElement(By.id("error-email")).isDisplayed());
+    }
+    public void asserTPasswordError(){
+        Assert.assertTrue(driver.findElement(By.id("error-password")).isDisplayed());
+    }
+    public void assertAllEmptyFields(){
+        asserTFirstNameError();
+        asserTLasttNameError();
+        asserTEmailError();
+        asserTPasswordError();
+    }
+    public void assertInvalidRegister(){
+        String url=driver.getCurrentUrl();
+        Assert.assertEquals(url,"http://localhost:8888/opencartDemo/index.php?route=account/register&language=en-gb");
+    }
+
+    public void assertSuccessfulRegister(){
+        String successMessage=driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText();
+        Assert.assertEquals(successMessage,"Your Account Has Been Created!");
+    }
 }
