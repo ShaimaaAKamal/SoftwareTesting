@@ -8,9 +8,29 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
+//public class BaseTest {
+//    public WebDriver driver;
+//    ChromeOptions options;
+//
+//    @BeforeClass
+//    public void setUp(){
+//        options = new ChromeOptions();
+//        options.addArguments("--incognito");
+//        options.addArguments("--start-maximized");
+//        driver = new ChromeDriver(options);
+//    }
+//
+//    @AfterClass
+//    public void tearDown(){
+//        if(driver != null){
+//            driver.quit();
+//        }
+//    }
+//}
+
 public class BaseTest {
-    public WebDriver driver;
-    ChromeOptions options;
+    public static WebDriver driver;
+    public static ChromeOptions options;
 
     @BeforeSuite
     public void setUp(){

@@ -16,6 +16,7 @@ public class Register_Page {
     WebElement newsLetter;
     WebElement submit;
     Faker faker = new Faker();
+    public static String currentEmail="";
 
     public Register_Page(WebDriver parentDriver){
         driver=parentDriver;
@@ -37,6 +38,7 @@ public class Register_Page {
 
     public  void enterMail(){
         String mail=generateFakeEmail();
+        currentEmail=mail;
         this.mail.sendKeys(mail);
     }
     public  void enterPassword(String password){
