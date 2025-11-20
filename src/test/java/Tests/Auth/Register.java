@@ -5,20 +5,16 @@ import Pages.Home_Page;
 import Tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 
 public class Register extends BaseTest {
 
     Register_Page register;
-    WebDriverWait wait;
     Home_Page home;
     @BeforeMethod
     public void preCondition(){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("http://localhost:8888/opencartDemo/");
         home =new Home_Page(driver);
         home.clickMyAccount();
@@ -26,10 +22,6 @@ public class Register extends BaseTest {
         register = new Register_Page(driver);
     }
 
-    // 🔹 Helper wait method for visibility
-    public void waitForVisible(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
 
     //Register with Empty Fields
     @Test(priority = 0)
@@ -119,27 +111,27 @@ public class Register extends BaseTest {
     }
 
 
-//    @Test(priority = 1)
-//    public void registerWithFirstNameExceedingMaxLength()  {
-//        register.enterFirstName("Superduperultramegatasticwordddd");
-//        register.enterlastName("ahmed");
-//        register.enterMail();
-//        register.enterPassword("Test710@");
-//        register.togglePrivacy();
-//        register.submitForm();
-//        waitForVisible(By.id("error-firstname"));
-//        register.asserTFirstNameError();
-//    }
-//
-//    @Test(priority = 1)
-//    public void registerWithLastNameExceddingMaxLength() {
-//        register.enterFirstName("ahmed");
-//        register.enterlastName("Superduperultramegatasticwordddd");
-//        register.enterMail();
-//        register.enterPassword("Test710@");
-//        register.togglePrivacy();
-//        register.submitForm();
-//        waitForVisible(By.id("error-lastname"));
-//        register.asserTLasttNameError();
-//    }
+    @Test(priority = 1)
+    public void registerWithFirstNameExceedingMaxLength()  {
+        register.enterFirstName("Superduperultramegatasticwordddd");
+        register.enterlastName("ahmed");
+        register.enterMail();
+        register.enterPassword("Test710@");
+        register.togglePrivacy();
+        register.submitForm();
+        waitForVisible(By.id("error-firstname"));
+        register.asserTFirstNameError();
+    }
+
+    @Test(priority = 1)
+    public void registerWithLastNameExceddingMaxLength() {
+        register.enterFirstName("ahmed");
+        register.enterlastName("Superduperultramegatasticwordddd");
+        register.enterMail();
+        register.enterPassword("Test710@");
+        register.togglePrivacy();
+        register.submitForm();
+        waitForVisible(By.id("error-lastname"));
+        register.asserTLasttNameError();
+    }
 }

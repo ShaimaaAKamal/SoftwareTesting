@@ -1,24 +1,18 @@
 package Tests.Auth;
 
 import Pages.Auth.Login_Page;
-import Pages.Auth.Register_Page;
 import Pages.Home_Page;
 import Tests.BaseTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 
 public class Login extends BaseTest {
     Login_Page login;
-    WebDriverWait wait;
     Home_Page home;
     @BeforeMethod
     public void preCondition(){
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("http://localhost:8888/opencartDemo/");
         home=new Home_Page(driver);
         home.clickMyAccount();
@@ -26,17 +20,12 @@ public class Login extends BaseTest {
         login = new Login_Page(driver);
     }
 
-    // 🔹 Helper wait method for visibility
-    public void waitForVisible(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
     @Test(priority = 0)
     public void loginWithEmptyEmail() {
 
         login.enterPassword("Test710@");
         login.submitForm();
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 
@@ -44,7 +33,7 @@ public class Login extends BaseTest {
     public void loginWithEmptyPassword() {
         login.enterEmail("temo@gmail.com");
         login.submitForm();
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 //
@@ -53,7 +42,7 @@ public class Login extends BaseTest {
         login.submitForm();
 
         // Wait for any one error (first name error)
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 
@@ -64,7 +53,7 @@ public class Login extends BaseTest {
         login.submitForm();
 
         // Wait for any one error (first name error)
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 
@@ -75,7 +64,7 @@ public class Login extends BaseTest {
         login.submitForm();
 
         // Wait for any one error (first name error)
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 
@@ -86,7 +75,7 @@ public class Login extends BaseTest {
         login.submitForm();
 
         // Wait for any one error (first name error)
-        waitForVisible(By.cssSelector(".alert-danger"));
+        waitForVisible(login.errorMessage);
         login.assertLoginError();
     }
 

@@ -8,6 +8,8 @@ public class Home_Page {
     By myAccount=By.cssSelector(".fa-user");
     By registerLink=By.linkText("Register");
     By loginLink=By.linkText("Login");
+    public By accountLink=By.linkText("My Account");
+
     public Home_Page(WebDriver driver){
         this.driver=driver;
     }
@@ -23,4 +25,10 @@ public class Home_Page {
         driver.findElement(loginLink).click();
 
     }
+
+    public void clickAccountLink(){
+        driver.findElement(accountLink).click();
+
+    }
+
 }

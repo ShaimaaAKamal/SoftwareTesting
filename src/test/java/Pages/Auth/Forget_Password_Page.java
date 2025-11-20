@@ -6,12 +6,14 @@ import org.testng.Assert;
 
 public class Forget_Password_Page {
     WebDriver driver;
-    By email=By.xpath("//input[@id='input-email']");
-    By backBtn=By.xpath("//a[@class='btn btn-light']");
-    By continueBtn=By.xpath("//button[@type='submit']");
-    By errorMessage=By.cssSelector(".alert.alert-danger.alert-dismissible");
+    public By email=By.xpath("//input[@id='input-email']");
+    public By backBtn=By.cssSelector("a[class='btn btn-light']");
+    public By continueBtn=By.xpath("//button[@type='submit']");
+    public By errorMessage=By.cssSelector(".alert.alert-danger.alert-dismissible");
+    Login_Page loginPage;
     public Forget_Password_Page(WebDriver driver){
         this.driver=driver;
+        loginPage=new Login_Page(driver);
     }
 
     public void enterEmailAddress(String mail){
@@ -28,5 +30,14 @@ public class Forget_Password_Page {
 
     public void assertError(){
         Assert.assertTrue(driver.findElement(errorMessage).isDisplayed());
+    }
+
+    public void assertBackToLogin(){
+        Assert.assertTrue(driver.findElement(loginPage.email).isDisplayed());
+        Assert.assertTrue(driver.findElement(loginPage.password).isDisplayed());
+    }
+
+    public void assertSuccessMessage(){
+        Assert.assertTrue(driver.findElement(loginPage.successForgetPasswordMessage).isDisplayed());
     }
 }

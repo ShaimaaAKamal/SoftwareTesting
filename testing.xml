@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Automation Suite" parallel="false">
-
     <test name="AuthTest">
         <classes>
             <class name="Tests.Auth.Register"/>
             <class name="Tests.Auth.Logout"/>
+            <class name="Tests.Auth.Forget_Password"/>
             <class name="Tests.Auth.Login"/>
+        </classes>
+    </test>
+    <test name="accountTest">
+        <classes>
+            <class name="Tests.Auth.Account"/>
         </classes>
     </test>
 </suite>
