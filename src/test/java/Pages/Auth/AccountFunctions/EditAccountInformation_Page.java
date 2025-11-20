@@ -2,6 +2,7 @@ package Pages.Auth.AccountFunctions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class EditAccountInformation_Page {
     WebDriver driver;
@@ -18,12 +19,20 @@ public class EditAccountInformation_Page {
     public void enterFirstName(String firstName){
         driver.findElement(this.firstName).sendKeys(firstName);
     }
-
+    public void clearFirstName(){
+        driver.findElement(this.firstName).clear();
+    }
     public void enterLastName(String lastName){
         driver.findElement(this.lastName).sendKeys(lastName);
     }
+    public void clearLastName(){
+        driver.findElement(this.lastName).clear();
+    }
     public void enterEmailAddress(String email){
         driver.findElement(this.emailAddress).sendKeys(email);
+    }
+    public void clearEmailAddress(){
+        driver.findElement(emailAddress).clear();
     }
 
     public void back(){
@@ -32,5 +41,21 @@ public class EditAccountInformation_Page {
 
     public void changeInformation(){
         driver.findElement(continueBtn).click();
+    }
+
+    public void asserTFirstNameError(){
+        Assert.assertTrue(driver.findElement(By.id("error-firstname")).isDisplayed());
+    }
+    public void asserTLasttNameError(){
+        Assert.assertTrue(driver.findElement(By.id("error-lastname")).isDisplayed());
+    }
+    public void asserTEmailError(){
+        Assert.assertTrue(driver.findElement(By.id("error-email")).isDisplayed());
+    }
+
+    public void assertAllEmptyFields(){
+        asserTFirstNameError();
+        asserTLasttNameError();
+        asserTEmailError();
     }
 }

@@ -81,7 +81,7 @@ public class Login extends BaseTest {
 
     @Test(priority = 1)
     public void loginWithvalidEmailAndvalidPassword() {
-        login.enterEmail("temo@gmail.com");
+        login.enterEmail("tete@gmail.com");
         login.enterPassword("Test710@");
         login.submitForm();
         wait.until(ExpectedConditions.not(

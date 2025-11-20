@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class OrderHistory {
+import Tests.BaseTest;
+
+public class OrderHistory extends BaseTest {
 }

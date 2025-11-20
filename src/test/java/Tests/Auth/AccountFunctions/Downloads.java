@@ -2,5 +2,5 @@ package Tests.Auth.AccountFunctions;
 
 import Tests.BaseTest;
 
-public class RewardPoints extends BaseTest {
+public class Downloads extends BaseTest {
 }

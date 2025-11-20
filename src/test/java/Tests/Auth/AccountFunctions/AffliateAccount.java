@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class AffliateAccount {
+import Tests.BaseTest;
+
+public class AffliateAccount extends BaseTest {
 }

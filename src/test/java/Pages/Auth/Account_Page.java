@@ -26,7 +26,7 @@ public class Account_Page {
     By trans=By.linkText("Transactions");
     By newsLetters=By.linkText("Newsletter");
     By logout =By.linkText("Logout");
-
+    public By updatedSuccessfully=By.xpath("//div[@class='alert alert-success alert-dismissible']");
     public Account_Page(WebDriver driver){
         this.driver=driver;
     }

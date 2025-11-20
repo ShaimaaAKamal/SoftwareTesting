@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class NewLetters {
+import Tests.BaseTest;
+
+public class NewLetters extends BaseTest {
 }

@@ -1,9 +1,6 @@
 package Tests.Auth;
 
-import Pages.Auth.AccountFunctions.AddressBook_Page;
-import Pages.Auth.AccountFunctions.ChangePassword_Page;
-import Pages.Auth.AccountFunctions.EditAccountInformation_Page;
-import Pages.Auth.AccountFunctions.wishlist_Page;
+import Pages.Auth.AccountFunctions.*;
 import Pages.Auth.Account_Page;
 import Pages.Auth.Login_Page;
 import Pages.Home_Page;
@@ -18,6 +15,14 @@ public class Account extends BaseTest {
     ChangePassword_Page changePassword;
     AddressBook_Page addressBook;
     wishlist_Page wishlist;
+    Transcations_Page transcations;
+    OrderHistory_Page orderHistory;
+    Subscriptions_Page subscriptions;
+    ReturnRequests_Page returns;
+    AffilateAccount_Page account;
+    NewLetters_Page newsLetters;
+    RewardPoint_Page rewardPoints;
+    Downloads_Page downloads;
     @BeforeTest
     public void beforeTest(){
         home=new Home_Page(driver);
@@ -27,6 +32,14 @@ public class Account extends BaseTest {
         changePassword=new ChangePassword_Page(driver);
         addressBook=new AddressBook_Page(driver);
         wishlist=new wishlist_Page(driver);
+        orderHistory=new OrderHistory_Page(driver);
+        subscriptions=new Subscriptions_Page(driver);
+        downloads=new Downloads_Page(driver);
+        rewardPoints=new RewardPoint_Page(driver);
+        returns=new ReturnRequests_Page(driver);
+        transcations=new Transcations_Page(driver);
+        newsLetters=new NewLetters_Page(driver);
+        account=new AffilateAccount_Page(driver);
         accountPage.logout();
     }
     @BeforeMethod
@@ -34,7 +47,7 @@ public class Account extends BaseTest {
         driver.get("http://localhost:8888/opencartDemo/");
         home.clickMyAccount();
         home.clickLogin();
-        login.enterEmail("temo@gmail.com");
+        login.enterEmail("tete@gmail.com");
         login.enterPassword("Test710@");
         login.submitForm();
         waitForVisible(accountPage.editInformation);
@@ -87,4 +100,80 @@ public class Account extends BaseTest {
         accountPage.navigateToWishlistUsingSidebar();
         waitForVisible(wishlist.pageTitle);
     }
+    @Test(priority = 0)
+    public void navigateToOrderHistoryUsingMainPage(){
+        accountPage.navigateToOrderHistoryUsinMainPage();
+        waitForVisible(orderHistory.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToOrderHistorytUsingSidebar(){
+        accountPage.navigateToOrderHistoryUsingSidebar();
+        waitForVisible(orderHistory.pageTitle);
+    }
+
+
+    @Test(priority = 0)
+    public void navigateToSubscriptionsUsingSidebar(){
+        accountPage.navigateToSubscriptionsUsingSidebar();
+        waitForVisible(subscriptions.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToDownloadsUsingSidebar(){
+        accountPage.navigateToDownloadsUsingSidebar();
+        waitForVisible(downloads.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToRewardPointsUsingSidebar(){
+        accountPage.navigateToRewardPointsUsingSidebar();
+        waitForVisible(rewardPoints.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToRewardPointsUsingMainPage(){
+        accountPage.navigateToRewardPointsUsingMainPage();
+        waitForVisible(rewardPoints.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToReturnsUsingSidebar(){
+        accountPage.navigateToReturnsRequestsUsingSidebar();
+        waitForVisible(returns.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToReturnsUsingMainPage(){
+        accountPage.navigateToReturnsRequestsUsingMainPage();
+        waitForVisible(returns.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToTranscationsUsingSidebar(){
+        accountPage.navigateToTranscationsUsingSidebar();
+        waitForVisible(transcations.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToTranscationsUsingMainPage(){
+        accountPage.navigateToTranscationsUsingMainPage();
+        waitForVisible(transcations.pageTitle);
+    }
+
+    @Test(priority = 0)
+    public void navigateToNewLettersUsingMainPage(){
+        accountPage.navigateToNewsLetters();
+        waitForVisible(newsLetters.pageTitle);
+    }
+
+
+    @Test(priority = 0)
+    public void navigateToAccountUsingMainPage(){
+        accountPage.navigateTAffliateAccountUsingMainPage();
+        waitForVisible(account.pageTitle);
+    }
+
+
+
 }

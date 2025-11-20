@@ -2,6 +2,7 @@ package Pages.Auth.AccountFunctions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class ChangePassword_Page {
     WebDriver driver;
@@ -10,7 +11,8 @@ public class ChangePassword_Page {
     By confirmPassword=By.xpath("//input[@id='input-confirm']");
     By backBtn=By.xpath("//a[@class='btn btn-light']");
     By changeBtn=By.xpath("//button[@type='submit']");
-
+    public By passwordError=By.xpath("//div[@id='error-password']");
+    public By confirmPasswordError=By.xpath("//div[@id='error-confirm']");
     public ChangePassword_Page(WebDriver driver){
         this.driver=driver;
     }
@@ -29,6 +31,20 @@ public class ChangePassword_Page {
 
     public void changePassword(){
         driver.findElement(changeBtn).click();
+    }
+
+    public void assertEmptyPasswordError(){
+        Assert.assertTrue(driver.findElement(passwordError).isDisplayed());
+        Assert.assertTrue(driver.findElement(confirmPasswordError).isDisplayed());
+    }
+
+    public void assertEmptyConfirmPassword(){
+        Assert.assertTrue(driver.findElement(confirmPasswordError).isDisplayed());
+    }
+
+    public void assertBothEmpty(){
+        Assert.assertTrue(driver.findElement(passwordError).isDisplayed());
+        Assert.assertTrue(driver.findElement(confirmPasswordError).isDisplayed());
     }
 }
 

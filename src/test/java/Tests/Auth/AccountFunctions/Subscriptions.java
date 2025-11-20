@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class Subscriptions {
+import Tests.BaseTest;
+
+public class Subscriptions extends BaseTest {
 }

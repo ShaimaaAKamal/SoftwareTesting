@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class ReturnRequests {
+import Tests.BaseTest;
+
+public class ReturnRequests  extends BaseTest {
 }

@@ -1,4 +1,6 @@
 package Tests.Auth.AccountFunctions;
 
-public class Transcations {
+import Tests.BaseTest;
+
+public class Transcations extends BaseTest {
 }
