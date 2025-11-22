@@ -2,6 +2,7 @@ package Tests.Auth.AccountFunctions;
 
 import Pages.Auth.AccountFunctions.AddressBook_Page;
 import Pages.Auth.AccountFunctions.ChangePassword_Page;
+import Pages.Auth.AccountFunctions.NewAddress_Page;
 import Pages.Auth.Account_Page;
 import Pages.Auth.Login_Page;
 import Pages.Home_Page;
@@ -15,12 +16,13 @@ public class AddressBook extends BaseTest {
     Home_Page home;
     Account_Page accountPage;
     Login_Page login;
-
+    NewAddress_Page newAddress;
     @BeforeMethod
     public void preCondition() {
         driver.get("http://localhost:8888/opencartDemo/");
         addressBook = new AddressBook_Page(driver);
         accountPage=new Account_Page(driver);
+        newAddress=new NewAddress_Page(driver);
         home=new Home_Page(driver);
         login=new Login_Page(driver);
         home.clickMyAccount();
@@ -29,7 +31,7 @@ public class AddressBook extends BaseTest {
         login.enterPassword("Test710@");
         login.submitForm();
         waitForVisible(accountPage.editInformation);
-        accountPage.navigateToChangePasswordUsingMainPage();
+        accountPage.navigateToAddressBookUsingMainPage();
         waitForVisible(addressBook.pageTitle);
     }
 
@@ -47,6 +49,26 @@ public class AddressBook extends BaseTest {
     @Test(priority = 0)
     public void addNewAddress() {
         addressBook.addNewAddress();
-        waitForVisible(accountPage.editInformation);
+        waitForVisible(newAddress.pageTitle);
     }
+
+    @Test(priority = 0)
+    public void removeOnlyExistingAddress() {
+        if(addressBook.addressesCount() ==  1){
+            addressBook.deleteOnlyAddress();
+            waitForVisible(addressBook.errorMessage);
+        }
+    }
+    @Test(priority = 0)
+    public void removeOneAddressUsingIndex() {
+        int index=1;
+        int noOfAddress=addressBook.addressesCount();
+        if((noOfAddress-1) >= index && index !=0){
+            addressBook.deleteAddressUsingIndex(1);
+        }
+    }
+
+
+
+
 }

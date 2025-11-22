@@ -22,8 +22,8 @@ public class BaseTest {
     public void setUp(){
         options = new ChromeOptions();
         options.addArguments("--incognito");
-        options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
     }
 
     @BeforeClass

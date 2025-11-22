@@ -22,12 +22,12 @@ public class NewAddress_Page {
     By region=By.id("input-zone");
     By yesDefaultt=By.xpath("//input[@id='input-default-yes']");
     By noDefault=By.xpath("//input[@id='input-default-no']");
-    By firstNameError=By.xpath("//div[@id='error-firstname']");
-    By lastNameError=By.xpath("//div[@id='error-lastname']");
-    By address_1_Error=By.xpath("//div[@id='error-address-1']");
-    By cityError=By.xpath("//div[@id='error-city']");
-    By PostCodeError=By.xpath("//div[@id='error-postcode']");
-    By regionError=By.xpath("//div[@id='error-zone']");
+    public By firstNameError=By.xpath("//div[@id='error-firstname']");
+    public By lastNameError=By.xpath("//div[@id='error-lastname']");
+    public By address_1_Error=By.xpath("//div[@id='error-address-1']");
+    public By cityError=By.xpath("//div[@id='error-city']");
+    public By PostCodeError=By.xpath("//div[@id='error-postcode']");
+    public By regionError=By.xpath("//div[@id='error-zone']");
 
     public NewAddress_Page(WebDriver driver){
         this.driver=driver;
@@ -62,12 +62,14 @@ public class NewAddress_Page {
 
     public void setCountry(String coun){
         WebElement countryElement=driver.findElement(country);
+        countryElement.click();
         Select select = new Select(countryElement);
         select.selectByValue(coun);
     }
 
     public void setState(String state){
         WebElement stateElement=driver.findElement(region);
+        stateElement.click();
         Select select = new Select(stateElement);
         select.selectByValue(state);
     }
@@ -114,5 +116,14 @@ public class NewAddress_Page {
     public void assertRegionError() {
         Assert.assertTrue(driver.findElement(regionError).isDisplayed(),
                 "Region error is NOT displayed!");
+    }
+
+    public void assertAllEmptyErrors(){
+        assertFirstNameError();
+        assertLastNameError();
+        assertCityError();
+        assertRegionError();
+        assertPostCodeError();
+        assertAddress1Error();
     }
 }

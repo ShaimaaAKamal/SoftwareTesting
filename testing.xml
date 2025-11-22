@@ -14,6 +14,8 @@
             <class name="Tests.Auth.Account"/>
             <class name="Tests.Auth.AccountFunctions.EditAccountInformation"/>
             <class name="Tests.Auth.AccountFunctions.ChangePassword"/>
+            <class name="Tests.Auth.AccountFunctions.AddressBook"/>
+            <class name="Tests.Auth.AccountFunctions.NewAddress"/>
         </classes>
     </test>
 </suite>
