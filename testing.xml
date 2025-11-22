@@ -14,8 +14,15 @@
             <class name="Tests.Auth.Account"/>
             <class name="Tests.Auth.AccountFunctions.EditAccountInformation"/>
             <class name="Tests.Auth.AccountFunctions.ChangePassword"/>
+            <class name="Tests.Auth.AccountFunctions.NewLetters"/>
+            <class name="Tests.Auth.AccountFunctions.AffliateAccount"/>
             <class name="Tests.Auth.AccountFunctions.AddressBook"/>
             <class name="Tests.Auth.AccountFunctions.NewAddress"/>
+        </classes>
+    </test>
+    <test name="Wishlist">
+        <classes>
+            <class name="Tests.Auth.AccountFunctions.Wistlist"/>
         </classes>
     </test>
 </suite>
