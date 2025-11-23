@@ -13,7 +13,7 @@ public class Account_Page {
     By rewardPoints     = By.linkText("Your Reward Points");
     By returnRequests   = By.linkText("View your return requests");
     By transcations     = By.linkText("Your Transactions");
-    By affliateAccount  = By.linkText("Register for an affiliate account");
+    public By affliateAccount  = By.linkText("Register for an affiliate account");
     By editAccount=By.linkText("Edit Account");
     By password=By.linkText("Password");
     By addressBook=By.linkText("Address Book");
@@ -26,6 +26,8 @@ public class Account_Page {
     By trans=By.linkText("Transactions");
     By newsLetters=By.linkText("Newsletter");
     By logout =By.linkText("Logout");
+    public By editAffliate=By.linkText("Edit your affiliate information");
+    By customAffliate=By.linkText("Custom Affiliate Tracking Code");
     public By updatedSuccessfully=By.xpath("//div[@class='alert alert-success alert-dismissible']");
     public Account_Page(WebDriver driver){
         this.driver=driver;
@@ -99,6 +101,16 @@ public class Account_Page {
         driver.findElement(affliateAccount).click();
     }
 
+    public void navigateToEditAffliateAccountUsingMainPage(){
+        driver.findElement(editAffliate).click();
+    }
 
+    public void navigateToCustomAffliateAccountUsingMainPage(){
+        driver.findElement(customAffliate).click();
+    }
+
+    public boolean editAffliateExists(){
+        return driver.findElement(editAffliate).isDisplayed();
+    }
 
 }

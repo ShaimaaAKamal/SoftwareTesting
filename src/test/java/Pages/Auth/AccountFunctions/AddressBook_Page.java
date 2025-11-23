@@ -27,10 +27,6 @@ public class AddressBook_Page {
         driver.findElement(newAddress).click();
     }
 
-//    public boolean addressesExists() {
-//        List<WebElement> trashs = driver.findElements(trashIcon);
-//        return trashs.isEmpty();
-//    }
 
     public int addressesCount() {
         List<WebElement> trashs = driver.findElements(trashIcon);
