@@ -1,7 +1,6 @@
 package Tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,5 +40,27 @@ public class BaseTest {
     public void waitForVisible(By locator){
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+    public void scrollIntoView(By locator) {
+        WebElement element = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+    }
+
+//    public void waitForClickable(By locator) {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.elementToBeClickable(locator));
+//    }
+//
+//    public void safeClick(By locator) {
+//        WebElement element = driver.findElement(locator);
+//
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].scrollIntoView({block: 'center'}); window.scrollBy(0, -200);",
+//                element
+//        );
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(locator));
+//        element.click();
+//    }
 
 }

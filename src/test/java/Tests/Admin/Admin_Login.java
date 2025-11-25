@@ -4,6 +4,7 @@ import Pages.Admin.Admin_Login_Page;
 import Pages.Auth.Login_Page;
 import Pages.Home_Page;
 import Tests.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,4 +88,17 @@ public class Admin_Login extends BaseTest {
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
     }
+
+    @Test(priority = 2)
+    public void syste() {
+        login.enterUsername("admin");
+        login.enterPassword("admin");
+        login.submitForm();
+        wait.until(ExpectedConditions.urlContains("user_token"));
+        driver.findElement(By.linkText("System")).click();
+        waitForVisible(By.xpath("/html[1]/body[1]/div[1]/nav[1]/ul[1]/li[8]/ul[1]/li[2]/a[1]" ));
+        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/nav[1]/ul[1]/li[8]/ul[1]/li[2]/a[1]")).click();
+    }
+
+
 }

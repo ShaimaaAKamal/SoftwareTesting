@@ -26,6 +26,7 @@ public class Account_Page {
     By trans=By.linkText("Transactions");
     By newsLetters=By.linkText("Newsletter");
     By logout =By.linkText("Logout");
+    By logo=By.xpath("//img[@title='Opencart']");
     public By editAffliate=By.linkText("Edit your affiliate information");
     By customAffliate=By.linkText("Custom Affiliate Tracking Code");
     public By updatedSuccessfully=By.xpath("//div[@class='alert alert-success alert-dismissible']");
@@ -36,6 +37,9 @@ public class Account_Page {
         driver.findElement(logout).click();
     }
 
+    public void clickLogo(){
+        driver.findElement(logo).click();
+    }
     public void navigateToNewsLetters(){
         driver.findElement(newsLetters).click();
     }
