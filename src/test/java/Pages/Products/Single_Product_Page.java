@@ -2,14 +2,16 @@ package Pages.Products;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class Single_Product_Page {
     WebDriver driver;
     // these locators for "iphone" product
-    By productTitle = By.cssSelector("div[class=\"col-sm\"] h1");
+    public By productTitle = By.cssSelector("div[class=\"col-sm\"] h1");
     By productPrice = By.xpath("//h2/span[@class=\"price-new\"]");
-    By wishlistBtn = By.xpath("//div/button[1][@class=\"btn btn-light btn-lg\"]");
+//    By wishlistBtn = By.xpath("//div/button[1][@class=\"btn btn-light btn-lg\"]");
+    By wishlistBtn=By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/button[1]");
     By compareBtn = By.xpath("//div/button[2][@class=\"btn btn-light btn-lg\"]");
     By aTCBtn = By.cssSelector("[id=button-cart]");
     By quantityTxtBox = By.id("input-quantity");
@@ -25,7 +27,7 @@ public class Single_Product_Page {
     By continueReviewBtn = By.cssSelector("[id=button-review]");
     By reviewSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
     By wishListErrorMsg = By.xpath("//div[@class=\"alert alert-danger alert-dismissible\"]");
-    public By wishListSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
+    public By wishListSuccessMsg = By.xpath("//div[@class='alert alert-success alert-dismissible']");
     By aTCSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
 
     public By iphoneProduct = By.linkText("iPhone");
@@ -42,6 +44,7 @@ public class Single_Product_Page {
     public String getProductPrice() {return driver.findElement(productPrice).getText(); }
 
     public void addToWishList() {
+        System.out.println(driver.findElement(wishlistBtn));
         driver.findElement(wishlistBtn).click();
     }
 
@@ -82,6 +85,19 @@ public class Single_Product_Page {
         driver.findElement(rateRadioBtn5).click();
     }
 
+    public void ClickProduct(By locator){
+        WebElement button = driver.findElement(locator);
+
+        // Scroll into view
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+
+        // Add small delay to ensure layout stabilizes
+        try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+        // Click using JS to bypass overlays
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+    }
+
     public void continueBtn() {
         driver.findElement(continueReviewBtn).click();
     }
@@ -90,6 +106,17 @@ public class Single_Product_Page {
     public void assertWishListError() {
         Assert.assertTrue(driver.findElement(wishListErrorMsg).isDisplayed());
     }
+    public void asserProductTitle() {
+        String title=getProductTitle();
+        Assert.assertTrue(!title.isEmpty());
+    }
+
+    public void asserProductPrice() {
+        String price=getProductPrice();
+        Assert.assertTrue(!price.isEmpty());
+    }
+
+
 
     public void assertWishListSuccess() {
         String successMsg = driver.findElement(wishListSuccessMsg).getText();

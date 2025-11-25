@@ -25,47 +25,49 @@ public class Single_Product extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost/opencart");
+        driver.get("http://localhost:8888/opencartDemo/");
         home = new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
         login = new Login_Page(driver);
-        login.enterEmail("admin@gmail.com");
-        login.enterPassword("admin1234");
-        login.submitForm();
         account = new Account_Page(driver);
-        waitForVisible(account.editInformation);
-//        account.navigateToHomePage();
-        Actions actions = new Actions(driver);
-        actions.scrollToElement(driver.findElement(By.linkText("iPhone"))).perform();
         singleProduct = new Single_Product_Page(driver);
-        singleProduct.productPage();
+        login.enterEmail("tete@gmail.com");
+        login.enterPassword("Test710@");
+        login.submitForm();
+        waitForVisible(account.editInformation);
+        account.clickLogo();
+        waitForVisible(home.feature);
+        singleProduct.ClickProduct(By.xpath("//a[text()='iPhone']"));
+        waitForVisible(singleProduct.productTitle);
+    }
+
+    @AfterMethod
+    public void after(){
+        driver.get("http://localhost:8888/opencartDemo/");
+        home.clickMyAccount();
+        home.clickLogout();
     }
 
 
     @Test (priority = 1)
     public void verifyProductTitle() {
-        String title = singleProduct.getProductTitle();
-        System.out.println("Product Title is : " + title);
+        singleProduct.asserProductTitle();
     }
 
     @Test (priority = 1)
     public void verifyProductPrice() {
-        String price = singleProduct.getProductPrice();
-        System.out.println("Product Price is : " + price);
+        singleProduct.asserProductPrice();
+
     }
 
     @Test (priority = 2)
     public void addToWishList() {
         singleProduct.addToWishList();
-    }
-
-    @Test (priority = 2)
-    public void verifyAddToWishListSuccessMsg() {
-        singleProduct.addToWishList();
         waitForVisible(singleProduct.wishListSuccessMsg);
         singleProduct.assertWishListSuccess();
     }
+
 
 
 

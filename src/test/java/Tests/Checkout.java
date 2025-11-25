@@ -24,9 +24,9 @@ public class Checkout extends BaseTest{
 
     @BeforeClass
     public void Setup() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get("http://localhost/opencart/");
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.get("http://localhost:8888/opencartDemo/");
         checkout = new Checkout_Page(driver);
         // Go to login page
         driver.findElement(By.cssSelector(".fa-user")).click();
@@ -35,7 +35,6 @@ public class Checkout extends BaseTest{
         driver.findElement(By.id("input-email")).sendKeys("nightmare.orc1000@hotmail.com");
         driver.findElement(By.id("input-password")).sendKeys("raxxarthrall");
         driver.findElement(By.xpath("//button[normalize-space()='Login']")).click();
-
     }
 
 
@@ -54,10 +53,10 @@ public class Checkout extends BaseTest{
 
     }
 
-    // 🔹 Helper wait method for visibility
-    public void waitForVisible(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+//    // 🔹 Helper wait method for visibility
+//    public void waitForVisible(By locator){
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//    }
 
     @Test(priority = 0)
     public void UsingExistingAddress (){

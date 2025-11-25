@@ -24,7 +24,6 @@ public class Cart_Page {
    public By productCartIcon = By.xpath("//div[@id='content']//div[1]//div[1]//div[2]//form[1]//div[1]//button[1]");
 //By productCartIcon = By.xpath("(//h3[text()='Featured']/following::button[@aria-label='Add to Cart'])[1]");
     By Total_Cart_value = By.xpath("//td[@class=\"text-end\"]");
-//    By Remove_Button = By.xpath("//a[@href=\"http://localhost:8080/opencart/index.php?route=checkout/cart.remove&language=en-gb&key=188\"]");
     By Remove_Button=By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/form[1]/div[1]/button[2]");
     By Modify_Quantity =By.name("quantity");
     public By Modify_Message = By.xpath("//div[@class='alert alert-success alert-dismissible']");
