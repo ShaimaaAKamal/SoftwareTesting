@@ -25,4 +25,22 @@
             <class name="Tests.Auth.AccountFunctions.Wistlist"/>
         </classes>
     </test>
+    <test name="Cart">
+        <classes>
+            <class name="Tests.Cart"/>
+        </classes>
+    </test>
+    <test name="test2">
+        <classes>
+            <class name="Tests.Products.Single_Product"/>
+            <class name="Tests.Checkout"/>
+        </classes>
+    </test>
+    <test name="admin">
+        <classes>
+            <class name="Tests.Admin.Admin_Login"/>
+            <class name="Tests.Admin.System.Settings"/>
+        </classes>
+    </test>
 </suite>
+

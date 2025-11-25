@@ -9,7 +9,8 @@ public class Login_Page {
     By email=By.xpath("//input[@id='input-email']");
     public By password=By.xpath("//input[@id='input-password']");
     By forgetPassword=By.linkText("Forgotten Password");
-    By loginBtn=By.xpath("//button[@type='submit']");
+//    By loginBtn=By.xpath("//button[@type='submit']");
+    By loginBtn = By.xpath("//button[text()='Login']");
     public  By successForgetPasswordMessage=By.xpath("//div[@class='alert alert-success alert-dismissible']");
     public By errorMessage=By.cssSelector(".alert-danger");
     public Login_Page(WebDriver driver){

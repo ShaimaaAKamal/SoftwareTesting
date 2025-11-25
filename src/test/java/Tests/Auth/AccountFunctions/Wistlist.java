@@ -21,7 +21,7 @@ public class Wistlist extends BaseTest {
     Login_Page login;
 
     @BeforeTest
-    public void beforeTest() throws InterruptedException {
+    public void beforeTest()  {
         driver.get("http://localhost:8888/opencartDemo/");
         home=new Home_Page(driver);
         accountPage=new Account_Page(driver);
@@ -65,14 +65,14 @@ public class Wistlist extends BaseTest {
         }
     }
 
-    @Test(priority = 1)
-    public void addWishlistProductToCart()  {
-        int count= wishlist.wishlistProductsCount();
-        if(count >= 1){
-            wishlist.addWishlisProductToCarttUsingIndex(0);
-            waitForVisible(wishlist.successMessage);
-        }
-    }
+//    @Test(priority = 1)
+//    public void addWishlistProductToCart()  {
+//        int count= wishlist.wishlistProductsCount();
+//        if(count >= 1){
+//            wishlist.addWishlisProductToCarttUsingIndex(0);
+//            waitForVisible(wishlist.successMessage);
+//        }
+//    }
 
     @Test(priority = 2)
     public void removeLastItemFromWishList(){

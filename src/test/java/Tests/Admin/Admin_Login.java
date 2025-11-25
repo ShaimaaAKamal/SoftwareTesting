@@ -95,9 +95,6 @@ public class Admin_Login extends BaseTest {
         login.enterPassword("admin");
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
-        driver.findElement(By.linkText("System")).click();
-        waitForVisible(By.xpath("/html[1]/body[1]/div[1]/nav[1]/ul[1]/li[8]/ul[1]/li[2]/a[1]" ));
-        driver.findElement(By.xpath("/html[1]/body[1]/div[1]/nav[1]/ul[1]/li[8]/ul[1]/li[2]/a[1]")).click();
     }
 
 

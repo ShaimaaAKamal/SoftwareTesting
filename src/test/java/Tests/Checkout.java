@@ -2,12 +2,16 @@ package Tests;
 
 import Pages.Auth.Account_Page;
 import Pages.Auth.Login_Page;
+import Pages.Cart_Page;
 import Pages.Checkout_Page;
 import Pages.Home_Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,20 +25,14 @@ public class Checkout extends BaseTest{
     Home_Page home;
     Account_Page accountPage;
     Login_Page login;
-
+    Cart_Page cartPage;
     @BeforeClass
     public void Setup() {
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get("http://localhost:8888/opencartDemo/");
+        home=new Home_Page(driver);
         checkout = new Checkout_Page(driver);
-        // Go to login page
-        driver.findElement(By.cssSelector(".fa-user")).click();
-        driver.findElement(By.xpath("//a[@class='dropdown-item'][normalize-space()='Login']")).click();
-        // Login
-        driver.findElement(By.id("input-email")).sendKeys("nightmare.orc1000@hotmail.com");
-        driver.findElement(By.id("input-password")).sendKeys("raxxarthrall");
-        driver.findElement(By.xpath("//button[normalize-space()='Login']")).click();
+        login=new Login_Page(driver);
+        accountPage=new Account_Page(driver);
+        cartPage=new Cart_Page(driver);
     }
 
 
@@ -42,27 +40,54 @@ public class Checkout extends BaseTest{
     @BeforeMethod
     public void preconditions ()
     {
+        driver.get("http://localhost:8888/opencartDemo/");
+        // Go to login page
+        home.clickMyAccount();
+        home.clickLogin();
+        // Login
+        login.enterEmail("tete@gmail.com");
+        login.enterPassword("Test710@");
+        driver.findElement(By.xpath("//button[text()='Login']")).click();
+        waitForVisible(accountPage.editInformation);
         // Add product
-        driver.findElement(By.xpath("//a[normalize-space()='Phones & PDAs']")).click();
-        driver.findElement(By.xpath("(//button)[1]")).click();
+        driver.findElement(By.xpath("//a[@class='nav-link'][text()='Phones & PDAs']")).click();
+        waitForVisible(By.xpath("//h2[text()='Phones & PDAs']"));
+//        driver.findElement(By.xpath("(//button)[1]")).click();
 
         // Go to checkout
-        driver.findElement(By.xpath("//button[normalize-space()='2 item(s) - $244.00']")).click();
-        driver.findElement(By.xpath("//strong[normalize-space()='Checkout']")).click();
-
-
+//        driver.findElement(By.cssSelector(".btn.btn-lg.btn-inverse.btn-block.dropdown-toggle")).click();
+        driver.findElement(cartPage.productCartIcon).click();
+        waitForVisible(cartPage.Success_Message);
+        waitFoRInVisible(cartPage.Success_Message);
+        driver.findElement(By.xpath("//span[text()='Checkout']")).click();
+        waitForVisible(checkout.pageTitle);
     }
 
-//    // 🔹 Helper wait method for visibility
-//    public void waitForVisible(By locator){
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//    }
+    @AfterMethod
+    public void after(){
+        driver.get("http://localhost:8888/opencartDemo/");
+        home.clickMyAccount();
+        home.clickLogout();
+    }
+
 
     @Test(priority = 0)
-    public void UsingExistingAddress (){
+  public void assertInCheckoutPage(){
+        checkout.assertInCheckoutPage();
+    }
+
+
+    @Test(priority = 0, dependsOnMethods = "assertInCheckoutPage")
+    public void assertExistingAddress (){
+        checkout.assertExistingAddresses();
+    }
+
+    @Test(priority = 0, dependsOnMethods = "assertExistingAddress")
+    public void chooseExistingAddress (){
         checkout.ChooseExistingAddress();
     }
-    @Test(priority = 1)
+
+    @Test(priority = 2)
     public void UsingNewAddressSuccess (){
         checkout.ChooseNewAddress();
         checkout.NewFirstName("Moamen");
@@ -74,6 +99,7 @@ public class Checkout extends BaseTest{
         checkout.NewPostCode(4444);
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
         checkout.AssertNewAddressSelected();
     }
 
@@ -88,9 +114,12 @@ public class Checkout extends BaseTest{
         checkout.NewPostCode(4444);
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.firstNameError);
         checkout.AssertFirstnameError();
     }
     @Test(priority = 1)
+
     public void UsingNewAddressMissingLastname (){
         checkout.ChooseNewAddress();
         checkout.NewFirstName("Moamen");
@@ -101,8 +130,11 @@ public class Checkout extends BaseTest{
         checkout.NewPostCode(4444);
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.lastNameError);
         checkout.AssertLastnameError();
     }
+
     @Test(priority = 1)
     public void UsingNewAddressMissingAddress1 (){
         checkout.ChooseNewAddress();
@@ -114,8 +146,11 @@ public class Checkout extends BaseTest{
         checkout.NewPostCode(4444);
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.address1Error);
         checkout.AssertAddress1Error();
     }
+
     @Test(priority = 1)
     public void UsingNewAddressMissingCity (){
         checkout.ChooseNewAddress();
@@ -127,20 +162,11 @@ public class Checkout extends BaseTest{
         checkout.NewPostCode(4444);
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.cityError);
         checkout.AssertCityError();
     }
-    @Test(priority = 1)
-    public void UsingNewAddressMissingCountry (){
-        checkout.ChooseNewAddress();
-        checkout.NewFirstName("Moamen");
-        checkout.NewLastName("Ahmed");
-        checkout.NewCompany("HiTechNour");
-        checkout.NewAddress1("48 Bavaria elmaadi");
-        checkout.NewAddress2("Madint Nasr");
-        checkout.NewPostCode(4444);
-        checkout.NewRegion();
-        checkout.AssertNewAddressCountryError();
-    }
+
     @Test(priority = 1)
     public void UsingNewAddressMissingPostCode (){
         checkout.ChooseNewAddress();
@@ -152,6 +178,8 @@ public class Checkout extends BaseTest{
         checkout.NewCity("Giza");
         checkout.NewCountry();
         checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.codeError);
         checkout.AssertNewAddressPostCodeError();
     }
 
@@ -166,47 +194,157 @@ public class Checkout extends BaseTest{
         checkout.NewCity("Giza");
         checkout.NewPostCode(4444);
         checkout.NewCountry();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.regionError);
         checkout.AssertNewAddressRegionError();
     }
 
-    @Test(priority = 1)
-    public void ShippingMethodSuccessful (){
-        checkout.ChooseExistingAddress();
-        checkout.ChooseShipping();
-        checkout.AssertShippingSuccess();
+    @Test(priority = 2)
+    public void useSuccessfullNewAddress (){
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
     }
 
-    @Test(priority = 1)
+
+    @Test(priority = 3 )
+    public void ShippingMethodSuccessful(){
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
+        checkout.clickContinueShipping();
+        waitForVisible(checkout.flatRateLabel);
+        checkout.clickShippingRadio();
+        checkout.chooseShippingMethod();
+        waitForVisible(checkout.successMessage);
+    }
+
+    @Test(priority = 3 )
     public void ShippingMethodFailure(){
-
-        checkout.ChooseShipping();
-        checkout.AssertShippingError();
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
+        checkout.clickContinueShipping();
+        waitForVisible(checkout.flatRateLabel);
+        checkout.chooseShippingMethod();
+        waitForVisible(checkout.errorMessage);
+        checkout.AssertShippingMethodError();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void PaymentMethodSuccess(){
-        checkout.ChooseExistingAddress();
-        checkout.ChooseShipping();
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
+        checkout.clickContinueShipping();
+        waitForVisible(checkout.flatRateLabel);
+        checkout.clickShippingRadio();
+        checkout.chooseShippingMethod();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
         checkout.PaymentMethod();
+        waitForVisible(checkout.PaymentContinueButton);
+        checkout.clickRadioButton();
+        checkout.clickPaymentContinueButton();
+        waitForVisible(checkout.successMessage);
         checkout.AssertPaymentSuccess();
     }
 
-    @Test(priority = 1)
-    public void PaymentMethodFailure(){
-        checkout.ChooseShipping();
+    @Test(priority = 3)
+    public void PaymentMethodSFailure(){
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
+        checkout.clickContinueShipping();
+        waitForVisible(checkout.flatRateLabel);
+        checkout.clickShippingRadio();
+        checkout.chooseShippingMethod();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
         checkout.PaymentMethod();
-        checkout.AssertPaymentError();
+        waitForVisible(checkout.PaymentContinueButton);
+        checkout.clickPaymentContinueButton();
+        waitForVisible(checkout.errorMessage);
+        checkout.AssertPaymentMethodError();
     }
 
-    @Test(priority = 1)
-    public void AssertCheckoutSuccess(){
-        checkout.ChooseExistingAddress();
-        checkout.ChooseShipping();
+    @Test(priority = 4)
+    public void PlaceAnOrder(){
+        checkout.ChooseNewAddress();
+        checkout.NewFirstName("Moamen");
+        checkout.NewLastName("Ahmed");
+        checkout.NewCompany("HiTechNour");
+        checkout.NewAddress1("48 Bavaria elmaadi");
+        checkout.NewAddress2("Madint Nasr");
+        checkout.NewCity("Giza");
+        checkout.NewPostCode(4444);
+        checkout.NewCountry();
+        checkout.NewRegion();
+        checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
+        checkout.clickContinueShipping();
+        waitForVisible(checkout.flatRateLabel);
+        checkout.clickShippingRadio();
+        checkout.chooseShippingMethod();
+        waitForVisible(checkout.successMessage);
+        waitFoRInVisible(checkout.successMessage);
         checkout.PaymentMethod();
+        waitForVisible(checkout.PaymentContinueButton);
+        checkout.clickRadioButton();
+        checkout.clickPaymentContinueButton();
+        waitForVisible(checkout.successMessage);
+        checkout.Confirm();
+        waitForVisible(checkout.orderPlaced);
         checkout.AssertSuccessfulCheckout();
     }
-
-
-
 
 }

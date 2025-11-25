@@ -21,6 +21,7 @@ public class BaseTest {
     public void setUp(){
         options = new ChromeOptions();
         options.addArguments("--incognito");
+        options.setCapability("unhandledPromptBehavior", "accept");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
@@ -40,6 +41,12 @@ public class BaseTest {
     public void waitForVisible(By locator){
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+    public void waitFoRInVisible(By locator){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+
+    }
+
 
     public void scrollIntoView(By locator) {
         WebElement element = driver.findElement(locator);

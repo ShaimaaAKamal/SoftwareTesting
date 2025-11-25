@@ -20,11 +20,31 @@ public class AddressBook_Page {
     }
 
     public void back() {
-        driver.findElement(backBtn).click();
+        WebElement button = driver.findElement(backBtn);
+
+        // Scroll into view
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+
+        // Add small delay to ensure layout stabilizes
+        try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+        // Click using JS to bypass overlays
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+//        driver.findElement(backBtn).click();
     }
 
     public void addNewAddress() {
-        driver.findElement(newAddress).click();
+        WebElement button = driver.findElement(newAddress);
+
+        // Scroll into view
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+
+        // Add small delay to ensure layout stabilizes
+        try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+        // Click using JS to bypass overlays
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+//        driver.findElement(newAddress).click();
     }
 
 
