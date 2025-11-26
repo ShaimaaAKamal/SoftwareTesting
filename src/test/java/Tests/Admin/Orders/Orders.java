@@ -97,6 +97,24 @@ public class Orders extends BaseTest {
         orders.assertEmptyOrders();
     }
 
+    @Test(priority = 0)
+    public void FilterOrderByExsitingTotal() throws InterruptedException {
+        String orderTotal=(orders.getOrderData(0)).get(4);
+        orders.enterTotalFilter(orderTotal);
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertTotalfILTEResult();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByInvalidTotall() throws InterruptedException {
+        orders.enterTotalFilter("%%%%%");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertEmptyOrders();
+    }
+
+
 
     @Test(priority = 0)
     public void FilterOrderByOrderStatus() throws InterruptedException {
@@ -132,6 +150,38 @@ public class Orders extends BaseTest {
         Thread.sleep(1000);
         orders.assertAllTablesData(count);
     }
+
+
+
+    @Test(priority = 0)
+    public void selectWithValidDate() throws InterruptedException {
+        int count=orders.getOrderCount();
+        orders.selectDateFrom("2025-11-26");
+        orders.selectDateTo("2025-11-26");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertAllTablesData(count);
+    }
+
+    @Test(priority = 0)
+    public void selectWithInvalidFutureDate() throws InterruptedException {
+        orders.selectDateFrom("2026-11-26");
+        orders.selectDateTo("2026-11-26");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertEmptyOrders();
+    }
+
+    @Test(priority = 0)
+    public void selectWithInvalidDateFirmat() throws InterruptedException {
+        orders.selectDateFrom("2026-1126");
+        orders.selectDateTo("2026-1126");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertEmptyOrders();
+    }
+
+
 
 
 

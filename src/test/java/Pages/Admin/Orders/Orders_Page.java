@@ -1,6 +1,7 @@
 package Pages.Admin.Orders;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -96,11 +97,6 @@ public class Orders_Page {
         driver.findElement(this.total).sendKeys(total);
     }
 
-//    public void selectStore(String name){
-//       WebElement stores= driver.findElement(orderStore);
-//       Select storeElement=new Select(stores);
-//       storeElement.selectByVisibleText(name);
-//    }
 
     public void selectStore(String name) {
         WebElement element = driver.findElement(orderStore);
@@ -116,12 +112,13 @@ public class Orders_Page {
                 break;
             }
         }
+
+        // If not found, just continue without throwing an error
+        if (!found) {
+            System.out.println("Order Store '" + name + "' not found → Continuing without selection.");
+        }
     }
-//    public void selectOrderStatus(String text){
-//        WebElement statuses= driver.findElement(orderStatus);
-//        Select orderStatus=new Select(statuses);
-//        orderStatus.selectByVisibleText(text);
-//    }
+
 
     public void selectOrderStatus(String text){
         WebElement element = driver.findElement(orderStatus);
@@ -144,44 +141,18 @@ public class Orders_Page {
         }
     }
 
-    public void selectDateFrom(String targetMonth, String targetYear, String targetDay) {
-        // Open the calendar by clicking the input
-        driver.findElement(dateFrom).click();
-
-        while (true) {
-            String monthYear = driver.findElement(calendarMonth).getText(); // e.g. "Oct 2025"
-
-            if (monthYear.equals(targetMonth + " " + targetYear)) {
-                break; // correct calendar view
-            }
-
-            // Navigate next
-            driver.findElement(nextButton).click();
-        }
-
-        // Select the day
-        driver.findElement(dayCell(targetDay)).click();
+    public void selectDateFrom(String dateFr) {
+        selectDate(dateFrom,dateFr);
     }
 
-    public void selectDateTo(String targetMonth, String targetYear, String targetDay) {
-        // Open the calendar by clicking the input
-        driver.findElement(dateFrom).click();
-
-        while (true) {
-            String monthYear = driver.findElement(calendarMonth).getText(); // e.g. "Oct 2025"
-
-            if (monthYear.equals(targetMonth + " " + targetYear)) {
-                break; // correct calendar view
-            }
-
-            // Navigate next
-            driver.findElement(nextButton).click();
-        }
-
-        // Select the day
-        driver.findElement(dayCell(targetDay)).click();
+    public void selectDateTo(String dateT) {
+        selectDate(dateTo,dateT);
     }
-
+private void selectDate(By locator,String val){
+    driver.findElement(locator).click();
+    driver.findElement(locator).sendKeys(val);
+    driver.findElement(locator).sendKeys(Keys.ENTER);
+}
 
     // Get total number of orders
     public int getOrderCount() {
@@ -256,6 +227,10 @@ public class Orders_Page {
     }
 
     public void assertCustomerfILTEResult(){
+        Assert.assertTrue(getOrderCount() >= 1);
+    }
+
+    public void assertTotalfILTEResult(){
         Assert.assertTrue(getOrderCount() >= 1);
     }
 
