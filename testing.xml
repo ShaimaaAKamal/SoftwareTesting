@@ -40,6 +40,7 @@
         <classes>
             <class name="Tests.Admin.Admin_Login"/>
             <class name="Tests.Admin.System.Settings"/>
+            <class name="Tests.Admin.Orders.Orders"/>
         </classes>
     </test>
 </suite>
