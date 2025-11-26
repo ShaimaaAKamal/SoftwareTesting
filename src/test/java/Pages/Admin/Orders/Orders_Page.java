@@ -96,16 +96,52 @@ public class Orders_Page {
         driver.findElement(this.total).sendKeys(total);
     }
 
-    public void selectStoreByIndex(int index){
-       WebElement stores= driver.findElement(orderStore);
-       Select storeElement=new Select(stores);
-       storeElement.selectByIndex(index);
-    }
+//    public void selectStore(String name){
+//       WebElement stores= driver.findElement(orderStore);
+//       Select storeElement=new Select(stores);
+//       storeElement.selectByVisibleText(name);
+//    }
 
-    public void selectOrderStatusByIndex(int index){
-        WebElement statuses= driver.findElement(orderStatus);
-        Select orderStatus=new Select(statuses);
-        orderStatus.selectByIndex(index);
+    public void selectStore(String name) {
+        WebElement element = driver.findElement(orderStore);
+        Select dropdown = new Select(element);
+
+        boolean found = false;
+
+        // Loop to check if the option exists
+        for (WebElement option : dropdown.getOptions()) {
+            if (option.getText().trim().equalsIgnoreCase(name.trim())) {
+                dropdown.selectByVisibleText(name);
+                found = true;
+                break;
+            }
+        }
+    }
+//    public void selectOrderStatus(String text){
+//        WebElement statuses= driver.findElement(orderStatus);
+//        Select orderStatus=new Select(statuses);
+//        orderStatus.selectByVisibleText(text);
+//    }
+
+    public void selectOrderStatus(String text){
+        WebElement element = driver.findElement(orderStatus);
+        Select dropdown = new Select(element);
+
+        boolean found = false;
+
+        // Loop to check if the option exists
+        for (WebElement option : dropdown.getOptions()) {
+            if (option.getText().trim().equalsIgnoreCase(text.trim())) {
+                dropdown.selectByVisibleText(text);
+                found = true;
+                break;
+            }
+        }
+
+        // If not found, just continue without throwing an error
+        if (!found) {
+            System.out.println("Order status '" + text + "' not found → Continuing without selection.");
+        }
     }
 
     public void selectDateFrom(String targetMonth, String targetYear, String targetDay) {
@@ -146,24 +182,6 @@ public class Orders_Page {
         driver.findElement(dayCell(targetDay)).click();
     }
 
-//    public void openDateFromMenu(){
-//        driver.findElement(dateFrom).click();
-//    }
-//    public void openDateToMenu(){
-//        driver.findElement(dateTo).click();
-//    }
-//
-//    public void openDateFromMenu(){
-//        driver.findElement(dateFrom).click();
-//    }
-//    public void openDateToMenu(){
-//        driver.findElement(dateTo).click();
-//    }
-
-
-
-
-
 
     // Get total number of orders
     public int getOrderCount() {
@@ -179,6 +197,14 @@ public class Orders_Page {
             data.add(row.findElement(By.cssSelector("td:nth-child(" + i + ")")).getText().trim());
         }
         return data;
+    }
+
+    // Get order info for a specific row (rowIndex starts from 0)
+    public String   getOrderfirstId() {
+        List<String> orderData=getOrderData(0);
+        System.out.println(orderData);
+        System.out.println(orderData.getFirst());
+        return orderData.getFirst();
     }
 
     // Click the "View" button for a specific row
@@ -225,5 +251,21 @@ public class Orders_Page {
         Assert.assertEquals(driver.findElement(noResultMessage).getText(),"No results!");
     }
 
+    public void assertOrderIDfILTEResult(){
+        Assert.assertEquals(getOrderCount(),1);
+    }
+
+    public void assertCustomerfILTEResult(){
+        Assert.assertTrue(getOrderCount() >= 1);
+    }
+
+    public void assertStatusfILTEResult(){
+        Assert.assertTrue(getOrderCount() >= 1);
+    }
+
+    public void assertAllTablesData(int count){
+        Assert.assertEquals(getOrderCount(),count);
+
+    }
 }
 

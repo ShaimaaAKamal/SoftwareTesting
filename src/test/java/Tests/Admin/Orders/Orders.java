@@ -6,7 +6,9 @@ import Pages.Admin.Orders.Orders_Page;
 import Pages.Admin.Orders.Single_Order_Page;
 import Pages.Admin.System.Settings_Page;
 import Tests.BaseTest;
+import net.datafaker.providers.entertainment.TheExpanse;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -57,6 +59,78 @@ public class Orders extends BaseTest {
          orders.clickAddNewIcon();
         wait.until(ExpectedConditions.urlContains("order.info"));
         order.AssertInPage();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByOrderId() throws InterruptedException {
+        int orderCount=orders.getOrderCount();
+        String OrderId=orders.getOrderfirstId();
+        orders.enterOrderIdFilter(OrderId);
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertOrderIDfILTEResult();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByNonExisingOrderId() throws InterruptedException {
+        orders.enterOrderIdFilter("-1");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertEmptyOrders();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByExsitingCustomer() throws InterruptedException {
+//        int orderCount=orders.getOrderCount();
+        String customerName=(orders.getOrderData(0)).get(2);
+        orders.enterCustomerFilter(customerName);
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertCustomerfILTEResult();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByNonExisingCustomer() throws InterruptedException {
+        orders.enterCustomerFilter("NONE");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertEmptyOrders();
+    }
+
+
+    @Test(priority = 0)
+    public void FilterOrderByOrderStatus() throws InterruptedException {
+        String status=(orders.getOrderData(0)).get(3);
+        orders.selectOrderStatus(status);
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertStatusfILTEResult();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderBynonExisingOrderStatus() throws InterruptedException {
+        int count=orders.getOrderCount();
+        orders.selectOrderStatus("");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertAllTablesData(count);
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderByStore() throws InterruptedException {
+        orders.selectStore("Default");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertStatusfILTEResult();
+    }
+
+    @Test(priority = 0)
+    public void FilterOrderBynonExistingStore() throws InterruptedException {
+        int count=orders.getOrderCount();
+        orders.selectStore("");
+        orders.clickFilterBtn();
+        Thread.sleep(1000);
+        orders.assertAllTablesData(count);
     }
 
 
