@@ -29,11 +29,11 @@ public class Orders_Page {
     By filterBtn=By.xpath("//button[@id='button-filter']");
     By noResultMessage=By.xpath("//td[text()='No results!']");
     By tableCount=By.xpath("//div[@class='col-sm-6 text-end']");
-
+    public By successMessage=By.xpath("//div[@class='alert alert-success alert-dismissible']");
     // Table locator
     By ordersTable = By.cssSelector("table.table.table-bordered.table-hover");
     By tableRows = By.cssSelector("table.table.table-bordered.table-hover tbody tr");
-
+    By closeBtn=By.cssSelector(".btn-close");
     // Column indexes based on your table (starting from 1)
     int colCheckbox = 1;
     int colOrderID = 2;
@@ -97,6 +97,9 @@ public class Orders_Page {
         driver.findElement(this.total).sendKeys(total);
     }
 
+    public void setCloseBtn(){
+        driver.findElement(closeBtn).click();
+    }
 
     public void selectStore(String name) {
         WebElement element = driver.findElement(orderStore);
@@ -154,10 +157,19 @@ private void selectDate(By locator,String val){
     driver.findElement(locator).sendKeys(Keys.ENTER);
 }
 
-    // Get total number of orders
     public int getOrderCount() {
-        return driver.findElements(tableRows).size();
+        List<WebElement> rows = driver.findElements(tableRows);
+
+        // If first row contains "No results!", return 0
+        if (rows.size() == 1 &&
+                rows.get(0).getText().contains("No results!")) {
+            return 0;
+        }
+
+        return rows.size();
     }
+
+
 
     // Get order info for a specific row (rowIndex starts from 0)
     public List<String> getOrderData(int rowIndex) {
@@ -181,7 +193,8 @@ private void selectDate(By locator,String val){
     // Click the "View" button for a specific row
     public void clickViewButton(int rowIndex) {
         WebElement row = driver.findElements(tableRows).get(rowIndex);
-        row.findElement(By.cssSelector("td:nth-child(" + colAction + ") a[aria-label='View']")).click();
+        row.findElement(By.cssSelector("a.btn.btn-primary i.fa-eye")).click();
+//        row.findElement(By.cssSelector("td:nth-child(" + colAction + ") a[aria-label='View']")).click();
     }
 
     // Select checkbox for a specific row
@@ -242,5 +255,23 @@ private void selectDate(By locator,String val){
         Assert.assertEquals(getOrderCount(),count);
 
     }
+
+    public void assertShippingIconisNotClickable(){
+        WebElement element = driver.findElement(shippingBtn);
+        boolean isClickable = element.isEnabled();
+
+        Assert.assertFalse(isClickable, "Shipping Button should NOT be clickable");
+    }
+
+    public void assertPrintInvoiceIconisNotClickable(){
+        WebElement element = driver.findElement(printInvoiceBtn);
+        boolean isClickable = element.isEnabled();
+
+        Assert.assertFalse(isClickable, "Print Invoice Button should NOT be clickable");
+    }
+
+   public void AssertSuccessDelete(){
+        Assert.assertTrue(driver.findElement(successMessage).isDisplayed());
+   }
 }
 

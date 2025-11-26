@@ -48,7 +48,7 @@ public class Orders extends BaseTest {
 
     @Test(priority = 0)
     public void assertEmptyOrders(){
-        if (orders.getOrderCount() != 1) {
+        if (orders.getOrderCount() != 0) {
             throw new SkipException("Skipping: Orders exist in the table.");
         }
         orders.assertEmptyOrders();
@@ -114,7 +114,16 @@ public class Orders extends BaseTest {
         orders.assertEmptyOrders();
     }
 
+    @Test(priority = 0)
+    public void assertShippingIconisNotClickable() throws InterruptedException {
+        orders.assertShippingIconisNotClickable();
+    }
 
+
+    @Test(priority = 0)
+    public void assertPrintInvoiceIconisNotClickable() throws InterruptedException {
+        orders.assertPrintInvoiceIconisNotClickable();
+    }
 
     @Test(priority = 0)
     public void FilterOrderByOrderStatus() throws InterruptedException {
@@ -180,10 +189,33 @@ public class Orders extends BaseTest {
         Thread.sleep(1000);
         orders.assertEmptyOrders();
     }
+    @Test(priority = 1)
+    public void viewOrderIcon() {
 
+        int count = orders.getOrderCount();
 
+        if (count == 0) {
+            throw new SkipException("Cannot run viewOrderIcon() because no orders exist.");
+        }
+        orders.clickViewButton(0);
+        wait.until(ExpectedConditions.urlContains("order.info"));
+        order.AssertInPage();
+    }
 
+    @Test(priority = 2)
+    public void deleteOrder() {
 
+        int count = orders.getOrderCount();
 
+        if (count == 0) {
+            throw new SkipException("Cannot run DeleteOrder() because no orders exist.");
+        }
+        orders.selectOrderCheckbox(0);
+        orders.clickDeleteIcon();
+        waitForVisible(orders.successMessage);
+        order.AssertSuccess();
+        orders.setCloseBtn();
+        waitFoRInVisible(orders.successMessage);
+    }
 
 }
