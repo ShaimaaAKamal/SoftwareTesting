@@ -11,7 +11,7 @@ public class Single_Product_Page {
     public By productTitle = By.cssSelector("div[class=\"col-sm\"] h1");
     By productPrice = By.xpath("//h2/span[@class=\"price-new\"]");
 //    By wishlistBtn = By.xpath("//div/button[1][@class=\"btn btn-light btn-lg\"]");
-    By wishlistBtn=By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[2]/form[1]/div[1]/button[1]");
+    By wishlistBtn=By.cssSelector("button.btn.btn-light.btn-lg > i.fa-heart");
     By compareBtn = By.xpath("//div/button[2][@class=\"btn btn-light btn-lg\"]");
     By aTCBtn = By.cssSelector("[id=button-cart]");
     By quantityTxtBox = By.id("input-quantity");
@@ -19,18 +19,15 @@ public class Single_Product_Page {
     By reviewsBtn = By.cssSelector("[class=nav-link]");
     By yourNameTxtBox = By.id("input-author");
     By yourReviewTxtBox = By.cssSelector("[id=input-text]");
-    By rateRadioBtn1 = By.xpath("//*[@id=\"input-rating\"]/input[1]");
-    By rateRadioBtn2 = By.xpath("//*[@id=\"input-rating\"]/input[2]");
-    By rateRadioBtn3 = By.xpath("//*[@id=\"input-rating\"]/input[3]");
-    By rateRadioBtn4 = By.xpath("//*[@id=\"input-rating\"]/input[4]");
     By rateRadioBtn5 = By.xpath("//*[@id=\"input-rating\"]/input[5]");
     By continueReviewBtn = By.cssSelector("[id=button-review]");
     By reviewSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
     By wishListErrorMsg = By.xpath("//div[@class=\"alert alert-danger alert-dismissible\"]");
     public By wishListSuccessMsg = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-    By aTCSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
-
+    public By aTCSuccessMsg = By.xpath("//div[@class=\"alert alert-success alert-dismissible\"]");
+    public By aTCErrorMsg = By.xpath("//div[@class=\"alert alert-danger alert-dismissible\"]");
     public By iphoneProduct = By.linkText("iPhone");
+    public By aTCEAlert = By.cssSelector(".alert");
 
     public void productPage() { driver.findElement(iphoneProduct).click(); }
 
@@ -78,11 +75,8 @@ public class Single_Product_Page {
     }
 
     public void rateRadioBtn() {
-        //  driver.findElement(rateRadioBtn1).click();
-        //  driver.findElement(rateRadioBtn2).click();
-        //  driver.findElement(rateRadioBtn3).click();
-        //  driver.findElement(rateRadioBtn4).click();
-        driver.findElement(rateRadioBtn5).click();
+//        driver.findElement(rateRadioBtn5).click();
+        ClickProduct(rateRadioBtn5);
     }
 
     public void ClickProduct(By locator){
@@ -126,6 +120,10 @@ public class Single_Product_Page {
     public void assertATCSuccess() {
         String successMsg = driver.findElement(aTCSuccessMsg).getText();
         Assert.assertEquals(successMsg,"Success: You have added iPhone to your shopping cart!");
+    }
+
+    public void assertATCError() {
+        Assert.assertTrue( driver.findElement(aTCErrorMsg).isDisplayed());
     }
 
     public void assertReviewSuccess() {

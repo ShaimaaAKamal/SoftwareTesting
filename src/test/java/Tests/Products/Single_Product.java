@@ -58,8 +58,45 @@ public class Single_Product extends BaseTest {
     @Test (priority = 1)
     public void verifyProductPrice() {
         singleProduct.asserProductPrice();
+    }
+
+
+    @Test (priority = 1)
+    public void compareProduct() {
+        singleProduct.compareProduct();
+    }
+
+    @Test (priority = 1)
+    public void addToCartButton() {
+        singleProduct.addToCart();
+    }
+
+    @Test (priority = 1)
+    public void assertATCSuccessMsgWhenEditProductQuantity() {
+        singleProduct.editQuantity(2);
+        singleProduct.addToCart();
+        waitForVisible(singleProduct.aTCSuccessMsg);
+        singleProduct.assertATCSuccess();
+    }
+
+    @Test (priority = 1)
+    public void assertNoATCSuccessMsgForZeroQuantity() {
+        singleProduct.editQuantity(0);
+        singleProduct.addToCart();
+        waitForVisible(singleProduct.aTCEAlert);
+        singleProduct.assertATCError();
 
     }
+
+    @Test (priority = 2)
+    public void addReview() {
+        singleProduct.reviews();
+        singleProduct.review_YourName("Test");
+        singleProduct.review_YourReview("Test111111111111111111");
+        singleProduct.rateRadioBtn();
+        singleProduct.continueBtn();
+    }
+
 
     @Test (priority = 2)
     public void addToWishList() {
@@ -74,3 +111,8 @@ public class Single_Product extends BaseTest {
 
 
 }
+
+
+
+
+

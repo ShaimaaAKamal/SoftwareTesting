@@ -170,7 +170,12 @@ public class Account extends BaseTest {
 
     @Test(priority = 0)
     public void navigateToAccountUsingMainPage(){
-        accountPage.navigateTAffliateAccountUsingMainPage();
+        if(driver.findElement(accountPage.affliateAccount).isDisplayed()){
+            accountPage.navigateTAffliateAccountUsingMainPage();
+        }
+        else {
+            accountPage.navigateToEditAffliateAccountUsingMainPage();
+        }
         waitForVisible(account.pageTitle);
     }
 
