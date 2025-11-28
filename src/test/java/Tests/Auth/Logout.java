@@ -8,19 +8,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Logout extends BaseTest {
-//    WebDriverWait wait;
     Home_Page home;
     @BeforeMethod
     public void preCondition(){
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         home=new Home_Page(driver);
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
     }
 
     @Test
     public void logout(){
-        driver.findElement(By.xpath("//a[@class='dropdown-item'][normalize-space()='Logout']")).click();
-
+        driver.findElement(By.xpath("//a[@class='dropdown-item'][text()='Logout']")).click();
     }
 }

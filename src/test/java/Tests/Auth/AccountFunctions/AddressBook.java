@@ -19,7 +19,7 @@ public class AddressBook extends BaseTest {
     NewAddress_Page newAddress;
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         addressBook = new AddressBook_Page(driver);
         accountPage=new Account_Page(driver);
         newAddress=new NewAddress_Page(driver);

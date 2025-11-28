@@ -15,7 +15,7 @@ public class Register extends BaseTest {
     Home_Page home;
     @BeforeMethod
     public void preCondition(){
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home =new Home_Page(driver);
         home.clickMyAccount();
         home.clickRegitser();

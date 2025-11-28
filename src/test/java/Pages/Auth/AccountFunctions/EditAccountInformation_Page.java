@@ -11,7 +11,7 @@ public class EditAccountInformation_Page {
     By lastName=By.xpath("//input[@id='input-lastname']");
     By emailAddress=By.xpath("//input[@id='input-email']");
     By backBtn=By.xpath("//a[@class='btn btn-light']");
-    By continueBtn=By.xpath("//button[@type='submit']");
+    By continueBtn=By.xpath("//button[text()='Continue']");
 
     public EditAccountInformation_Page(WebDriver driver){
         this.driver=driver;

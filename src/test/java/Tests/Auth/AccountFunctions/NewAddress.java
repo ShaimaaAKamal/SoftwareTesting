@@ -20,7 +20,7 @@ public class NewAddress extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         newAddress = new NewAddress_Page(driver);
         accountPage=new Account_Page(driver);
         addressBook=new AddressBook_Page(driver);
@@ -101,7 +101,7 @@ public class NewAddress extends BaseTest {
         newAddress.assertCityError();
     }
 
-    @Test(priority = 0)
+    @Test(priority = 3)
     public void addNewAddressWithEmptyCode(){
         newAddress.enterFirstName("omar");
         newAddress.enterLastName("kamal");
@@ -116,7 +116,7 @@ public class NewAddress extends BaseTest {
         newAddress.assertPostCodeError();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void addNewAddressWithCodeMoreThan10Digits(){
         newAddress.enterFirstName("omar");
         newAddress.enterLastName("kamal");
@@ -126,13 +126,13 @@ public class NewAddress extends BaseTest {
         newAddress.enterCity("Aswan");
         newAddress.setCountry("63");
         newAddress.setState("1004");
-        newAddress.setDefault();
+        newAddress.setNoDefault();
         newAddress.addAddress();
         waitForVisible(newAddress.PostCodeError);
         newAddress.assertPostCodeError();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void addNewAddressWithCodeLessThan2Digits(){
         newAddress.enterFirstName("omar");
         newAddress.enterLastName("kamal");
@@ -148,7 +148,7 @@ public class NewAddress extends BaseTest {
         newAddress.assertPostCodeError();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void addNewAddressWithFirstnameMoreThan32Chars(){
         newAddress.enterFirstName("pseudopseudohypoparathyroidism");
         newAddress.enterLastName("kamal");
@@ -164,7 +164,7 @@ public class NewAddress extends BaseTest {
         newAddress.assertFirstNameError();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void addNewAddressWithLastnameMoreThan32Chars(){
         newAddress.enterFirstName("omar");
         newAddress.enterLastName("pseudopseudohypoparathyroidism");
@@ -242,7 +242,7 @@ public class NewAddress extends BaseTest {
         waitForVisible(addressBook.pageTitle);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void addNewAddressWithValidData(){
         newAddress.enterFirstName("omar");
         newAddress.enterLastName("kamal");

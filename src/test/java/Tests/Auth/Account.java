@@ -44,7 +44,7 @@ public class Account extends BaseTest {
     }
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
         home.clickLogin();
         login.enterEmail("tete@gmail.com");

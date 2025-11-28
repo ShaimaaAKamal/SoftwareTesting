@@ -8,8 +8,9 @@ public class Forget_Password_Page {
     WebDriver driver;
     public By email=By.xpath("//input[@id='input-email']");
     public By backBtn=By.cssSelector("a[class='btn btn-light']");
-    public By continueBtn=By.xpath("//button[@type='submit']");
+    public By continueBtn=By.xpath("//button[text()='Continue']");
     public By errorMessage=By.cssSelector(".alert.alert-danger.alert-dismissible");
+
     Login_Page loginPage;
     public Forget_Password_Page(WebDriver driver){
         this.driver=driver;

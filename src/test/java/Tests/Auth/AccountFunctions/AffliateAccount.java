@@ -23,7 +23,7 @@ public class AffliateAccount extends BaseTest {
     TrackingCode_Page trackingCode;
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         account = new AffilateAccount_Page(driver);
         accountPage=new Account_Page(driver);
         trackingCode=new TrackingCode_Page(driver);

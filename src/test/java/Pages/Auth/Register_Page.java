@@ -26,7 +26,7 @@ public class Register_Page {
         password=driver.findElement(By.id("input-password"));
         privacy = driver.findElement(By.xpath("//input[@name='agree']"));
         newsLetter=driver.findElement(By.xpath("//input[@id='input-newsletter']"));
-        submit = driver.findElement(By.xpath("//button[@type='submit']"));
+        submit = driver.findElement(By.xpath("//button[text()='Continue']"));
     }
 
     public  void enterFirstName(String name){
@@ -80,7 +80,7 @@ public class Register_Page {
     }
     public void assertInvalidRegister(){
         String url=driver.getCurrentUrl();
-        Assert.assertEquals(url,"http://localhost:8888/opencartDemo/index.php?route=account/register&language=en-gb");
+        Assert.assertEquals(url,"http://localhost:8888/opencart/index.php?route=account/register&language=en-gb");
     }
 
     public void assertSuccessfulRegister(){

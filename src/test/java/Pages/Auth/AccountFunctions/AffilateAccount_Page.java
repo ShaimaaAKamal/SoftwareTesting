@@ -26,7 +26,7 @@ public class AffilateAccount_Page {
     By accountName=By.xpath("//input[@id='input-bank-account-name']");
     public By accountNumber=By.xpath("//input[@id='input-bank-account-number']");
     By privacy = By.xpath("//input[@id='input-agree']");
-    By continueBtn=By.xpath("//button[@type='submit']");
+    By continueBtn=By.xpath("//button[text()='Continue']");
     public By chequeError=By.xpath("//div[@id='error-cheque']");
     public By paypalError=By.xpath("//div[@id='error-paypal']");
     public By accountNameError=By.xpath("//div[@id='error-bank-account-name']");

@@ -24,7 +24,7 @@ public class Settings extends BaseTest {
         settingsPage = new Settings_Page(driver);
         login=new Admin_Login_Page(driver);
         dashboard=new Dashboard_Page(driver);
-        driver.get("http://localhost:8888/opencartDemo/myadminpanel");
+        driver.get("http://localhost:8888/opencart/myAdmin/");
         login.enterUsername("admin");
         login.enterPassword("admin");
         login.submitForm();
@@ -58,33 +58,41 @@ public class Settings extends BaseTest {
     public void Adding_New_Language_Successfully (){
         waitForVisible(settingsPage.System_Selecting);
         settingsPage.Navigating_To_Languages();
-        settingsPage.Language_Adding("ihoih", 33 , "No_Extension", "se-sa");
+        settingsPage.Language_Adding("Arabic", 33 , "No_Extension", "ar-EG");
         settingsPage.Assert_Language_AddedSuccessfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
     @Test(priority = 4)
     public void Editing_Language_Successfully (){
         settingsPage.Navigating_To_Languages();
-        settingsPage.Language_Editing("ihofh", 37, "No_Extension", "de-Eu");
+        settingsPage.Language_Editing("Arabic", 34, "No_Extension", "ar-EG");
         settingsPage.Asserting_Language_Edited_Successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
+
     @Test(priority = 5)
-    public void Adding_Currency_Successfully (){
-        waitForVisible(settingsPage.System_Selecting);
-        settingsPage.Navigate_To_currencies();
-        settingsPage.Currency_Adding("EgyptainPoud", "Lu7", "", "Lu7", 0.01 , 1);
-        settingsPage.Asserting_Currency_Added_Successfully();
+    public void Deleted_Language_Successfully (){
+        settingsPage.Navigating_To_Languages();
+        settingsPage.Language_Delete();
+        settingsPage.Asserting_Language_Deleted_successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
     @Test(priority = 6)
-    public void Editing_Currency_Successfully () {
+    public void Adding_Currency_Successfully (){
+        waitForVisible(settingsPage.System_Selecting);
         settingsPage.Navigate_To_currencies();
-        settingsPage.Currency_Editing("SaudiRayal", "R7Y", "", "R7Y", 0.06, 12);
-        settingsPage.Asserting_Currency_edited_successfully();
+        settingsPage.Currency_Adding("EgyptainPoud", "LEu", "", "LEu", 0.01 , 1);
+        settingsPage.Asserting_Currency_Added_Successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
     @Test(priority = 7)
+    public void Editing_Currency_Successfully () {
+        settingsPage.Navigate_To_currencies();
+        settingsPage.Currency_Editing("SaudiRayal", "R8Y", "", "R8Y", 0.06, 12);
+        settingsPage.Asserting_Currency_edited_successfully();
+        waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
+    }
+    @Test(priority = 8)
     public void Deleting_Currency_Successfully (){
         settingsPage.Navigate_To_currencies();
         settingsPage.Currency_Deleting();
@@ -103,7 +111,7 @@ public class Settings extends BaseTest {
     @Test(priority = 12)
     public void Editing_StockStatuses_Successfully (){
         settingsPage.Navigating_To_StockStatus();
-        settingsPage.Stock_Editing("Pre", "Ordered","ojef");
+        settingsPage.Stock_Editing("Pve", "Ordered","ojef");
         settingsPage.Asserting_Stock_Edited_successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
@@ -115,7 +123,7 @@ public class Settings extends BaseTest {
         settingsPage.Asserting_Stock_Deleted_successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void Adding_User_Successfully () throws InterruptedException {
         waitForVisible(settingsPage.System_Selecting);
         settingsPage.Navigate_To_Users();
@@ -123,7 +131,15 @@ public class Settings extends BaseTest {
         settingsPage.Asserting_User_Added_successfully();
         waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
     }
-   @Test(priority = 9)
+
+    @Test(priority = 10)
+    public void Deleted_User_Successfully () throws InterruptedException {
+        settingsPage.Navigate_To_Users();
+        settingsPage.User_Delete();
+        settingsPage.Asserting_User_deleted_successfully();
+        waitFoRInVisible(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
+    }
+   @Test(priority =14 )
     public void Adding_UserGroup_Successfully (){
        waitForVisible(settingsPage.System_Selecting);
        settingsPage.Navigating_UserGroup();

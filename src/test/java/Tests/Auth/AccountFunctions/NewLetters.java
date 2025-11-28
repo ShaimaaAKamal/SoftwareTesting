@@ -18,7 +18,7 @@ public class NewLetters extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         newsLetters = new NewLetters_Page(driver);
         accountPage=new Account_Page(driver);
         home=new Home_Page(driver);
@@ -47,7 +47,7 @@ public class NewLetters extends BaseTest {
     @Test
     public void continueClicking(){
         newsLetters.clickContinue();
-        waitForVisible(accountPage.editInformation);
+        waitForVisible(accountPage.updatedSuccessfully);
     }
 
     @Test

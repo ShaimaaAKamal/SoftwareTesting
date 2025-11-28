@@ -22,7 +22,7 @@ public class Wistlist extends BaseTest {
 
     @BeforeTest
     public void beforeTest()  {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home=new Home_Page(driver);
         accountPage=new Account_Page(driver);
         home.clickMyAccount();
@@ -30,7 +30,7 @@ public class Wistlist extends BaseTest {
     }
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         wishlist = new Wishlist_Page(driver);
         login=new Login_Page(driver);
         home.clickMyAccount();

@@ -10,7 +10,7 @@ public class ChangePassword_Page {
     By password=By.xpath("//input[@id='input-password']");
     By confirmPassword=By.xpath("//input[@id='input-confirm']");
     By backBtn=By.xpath("//a[@class='btn btn-light']");
-    By changeBtn=By.xpath("//button[@type='submit']");
+    By changeBtn=By.xpath("//button[text()='Continue']");
     public By passwordError=By.xpath("//div[@id='error-password']");
     public By confirmPasswordError=By.xpath("//div[@id='error-confirm']");
     public ChangePassword_Page(WebDriver driver){

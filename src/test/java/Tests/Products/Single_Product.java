@@ -25,7 +25,7 @@ public class Single_Product extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home = new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
@@ -44,7 +44,7 @@ public class Single_Product extends BaseTest {
 
     @AfterMethod
     public void after(){
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
         home.clickLogout();
     }

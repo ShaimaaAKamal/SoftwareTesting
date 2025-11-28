@@ -40,7 +40,7 @@ public class Checkout extends BaseTest{
     @BeforeMethod
     public void preconditions ()
     {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         // Go to login page
         home.clickMyAccount();
         home.clickLogin();

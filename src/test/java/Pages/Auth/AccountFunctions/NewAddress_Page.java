@@ -12,7 +12,7 @@ public class NewAddress_Page {
     By firstname=By.xpath("//input[@id='input-firstname']");
     By lastname=By.xpath("//input[@id='input-lastname']");
     By backBtn=By.xpath("//a[@class='btn btn-light']");
-    By continueBtn=By.xpath("//button[@type='submit']");
+    By continueBtn=By.xpath("//button[text()='Continue']");
     By company=By.xpath("//input[@id='input-company']");
     By address_1=By.xpath("//input[@id='input-address-1']");
     By address_2=By.xpath("//input[@id='input-address-2']");
@@ -26,7 +26,7 @@ public class NewAddress_Page {
     public By lastNameError=By.xpath("//div[@id='error-lastname']");
     public By address_1_Error=By.xpath("//div[@id='error-address-1']");
     public By cityError=By.xpath("//div[@id='error-city']");
-    public By PostCodeError=By.xpath("//div[@id='error-postcode']");
+    public By PostCodeError=By.id("error-postcode");
     public By regionError=By.xpath("//div[@id='error-zone']");
 
     public NewAddress_Page(WebDriver driver){

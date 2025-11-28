@@ -48,6 +48,8 @@ public class Settings_Page  {
     By Language_Save_Button = By.xpath("//button[i[contains(@class,'fa-floppy-disk')]]");
     By Language_Back_Button = By.xpath("//a[@aria-label='Back']");
     By Language_Edit_Button = By.xpath("//tbody/tr[1]//a[@title='Edit']");
+    By Language_Delete_Button = By.xpath("//button[@class='btn btn-danger']");
+    By Language_List = By.xpath("(//input[@type='checkbox'])[2]");
 
     // Navigating to System/Localisation/Currency //
     By Currencies_selectionTab =  By.xpath("//a[text()='Currencies']");
@@ -66,7 +68,7 @@ public class Settings_Page  {
     By Currency_Status = By.xpath("//input[@id='input-status']");
     By Currency_Save_Button = By.xpath("//i[@class='fa-solid fa-floppy-disk']");
     By Currency_Back_Button = By.xpath("//a[@aria-label='Back']");
-    By Currency_List = By.xpath("//input[@value='3']");
+    By Currency_List = By.xpath("(//input[@type='checkbox'])[6]");
 
     //Navigating to System/Localisation/Stock_Statuses //
 
@@ -75,21 +77,21 @@ public class Settings_Page  {
     // Adding new Stock Status //
     By Stock_Add_new_Button =By.xpath("//i[@class='fa-solid fa-plus']");
     By Stock_Delete_Button = By.xpath("//button[@class='btn btn-danger']");
-    By Stock_Edit_Button = By.xpath("//a[@aria-label='Edit']//i[@class='fa-solid fa-pencil']");
+    By Stock_Edit_Button = By.xpath("(//a[@title='Edit']//i[@class='fa-solid fa-pencil'])[2]");
     By Stock_Status_Name_Field_1 = By.xpath("//input[@id='input-name-1']");
-    By Stock_Status_Name_Field_2 = By.xpath("//input[@id='input-name-3']");
-    By Stock_Status_Name_Field_3 = By.xpath("//input[@id='input-name-4']");
+//    By Stock_Status_Name_Field_2 = By.xpath("//input[@id='input-name-3']");
+//    By Stock_Status_Name_Field_3 = By.xpath("//input[@id='input-name-4']");
     By Stock_Save_Button = By.xpath("//i[@class='fa-solid fa-floppy-disk']");
     By Stock_Back_Button = By.xpath("//i[@class='fa-solid fa-reply']");
-    By Stock_List = By.xpath("//input[@value='0']");
+    By Stock_List =By.xpath("(//input[@type='checkbox'])[6]");
 
     // Navigate to System/Users/Users //
-    By Users_Selection = By.xpath("/html[1]/body[1]/div[1]/nav[1]/ul[1]/li[8]/ul[1]/li[2]/a[1]");
+    By Users_Selection = By.xpath("//li[a[text()='Users']]");
     By Users_SelectionTab = By.xpath("//li[a[text()='Users']]//ul/li/a[text()='Users']");
 
     // Adding New User //
     By User_Add_new_Button = By.xpath("//a/i[@class='fa-solid fa-plus']");
-    By User_Delete_Button = By.xpath("//button[@aria-label='Delete']");
+    By User_Delete_Button =  By.xpath("//button[@class='btn btn-danger']");
     By User_Username_Field = By.xpath("//input[@id='input-username']");
     By User_UserGroup_Bar = By.xpath("//select[@id='input-user-group']");
     By User_FirstName_Field = By.xpath("//input[@id='input-firstname']");
@@ -103,7 +105,7 @@ public class Settings_Page  {
     By User_Status_Button = By.xpath("//input[@id='input-status']");
     By User_Save_Icon = By.xpath("//i[@class='fa-solid fa-floppy-disk']");
     By User_Back_Icon = By.xpath("//a[@aria-label='Back']");
-
+    By User_List= By.xpath("(//input[@type='checkbox'])[3]");
     // Navigate to System/Users/User_Group //
     By GroupUser_SelectionTab =By.xpath("//a[text()='User Groups']");
 
@@ -164,13 +166,15 @@ public class Settings_Page  {
     public void Editing_Existing_StoreInformation(String Name, String Address, Integer Telephone, Integer Code){
         driver.findElement(Store_EditButton).click();
         waitForVisible(Store_Name_field);
+        driver.findElement(Store_Name_field).clear();
         driver.findElement(Store_Name_field).sendKeys(Name);
+        driver.findElement(Store_Address_field).clear();
         driver.findElement(Store_Address_field).sendKeys(Address);
+        driver.findElement(Store_Telephone_field).clear();
         driver.findElement(Store_Telephone_field).sendKeys(String.valueOf(Telephone));
+        driver.findElement(Store_Geocode_field).clear();
         driver.findElement(Store_Geocode_field).sendKeys(String.valueOf(Code));
         driver.findElement(Store_SaveButton).click();
-//        driver.findElement(Store_BackButton).click();
-
     }
     public void Navigating_To_Languages(){
         waitForVisible(System_Selecting);
@@ -188,8 +192,8 @@ public class Settings_Page  {
         driver.findElement(Language_Extension_Field).sendKeys(Extension);
         driver.findElement(Language_Locale_Field).sendKeys(Locale);
         driver.findElement(Language_SortOrder_IncreaseButton).click();
+        driver.findElement(Language_Status_Button).click();
         driver.findElement(Language_Save_Button).click();
-//        driver.findElement(Language_Back_Button).click();
     }
     public void Language_Editing (String Name, Integer Code, String Locale,String Extension){
         driver.findElement(Language_Edit_Button).click();
@@ -198,16 +202,18 @@ public class Settings_Page  {
         driver.findElement(Language_Name_Field).sendKeys(Name);
         driver.findElement(Language_Code_Field).clear();
         driver.findElement(Language_Code_Field).sendKeys(String.valueOf(Code));
-
-
         driver.findElement(Language_Locale_Field).clear();
         driver.findElement(Language_Locale_Field).sendKeys(Locale);
-
         driver.findElement(Language_SortOrder_DecreaseButton).click();
-
         driver.findElement(Language_Save_Button).click();
-//        driver.findElement(Language_Back_Button).click();
     }
+
+    public void Language_Delete (){
+        waitForVisible(Language_Delete_Button);
+        driver.findElement(Language_List).click();
+        driver.findElement(Language_Delete_Button).click();
+    }
+
 
     public void Navigate_To_currencies () {
         waitForVisible(System_Selecting);
@@ -229,8 +235,6 @@ public class Settings_Page  {
         driver.findElement(Currency_Value).sendKeys(String.valueOf(Value));
         driver.findElement(Currency_Status).click();
         driver.findElement(Currency_Save_Button).click();
-//        driver.findElement(Currency_Back_Button).click();
-//        driver.findElement(Currency_Refresh_Button).click();
     }
 
 
@@ -257,8 +261,6 @@ public class Settings_Page  {
 
         driver.findElement(Currency_Status).click();
         driver.findElement(Currency_Save_Button).click();
-//        driver.findElement(Currency_Back_Button).click();
-//        driver.findElement(Currency_Refresh_Button).click();
     }
 
 
@@ -283,23 +285,17 @@ public class Settings_Page  {
         driver.findElement(Stock_Add_new_Button).click();
         waitForVisible(Stock_Status_Name_Field_1);
         driver.findElement(Stock_Status_Name_Field_1).sendKeys(Name1);
-        driver.findElement(Stock_Status_Name_Field_2).sendKeys(Name2);
-        driver.findElement(Stock_Status_Name_Field_3).sendKeys(Name3);
         driver.findElement(Stock_Save_Button).click();
-//        driver.findElement(Stock_Back_Button).click();
     }
     public void Stock_Editing (String Name1, String Name2,String Name3) {
         waitForVisible(Stock_Edit_Button);
         driver.findElement(Stock_Edit_Button).click();
         waitForVisible(Stock_Status_Name_Field_1);
+        driver.findElement(Stock_Status_Name_Field_1).clear();
         driver.findElement(Stock_Status_Name_Field_1).sendKeys(Name1);
-        driver.findElement(Stock_Status_Name_Field_2).sendKeys(Name2);
-        driver.findElement(Stock_Status_Name_Field_3).sendKeys(Name3);
         driver.findElement(Stock_Save_Button).click();
-//        driver.findElement(Stock_Back_Button).click();
     }
     public void Stock_Delete (){
-        waitForVisible(Stock_Delete_Button);
         waitForVisible(Stock_Delete_Button);
         driver.findElement(Stock_List).click();
         driver.findElement(Stock_Delete_Button).click();
@@ -330,11 +326,13 @@ public class Settings_Page  {
         driver.findElement(User_PasswordConfirmation_Field).sendKeys(Confirmation);
         scrollAndClick(User_Status_Button);
         scrollAndClick(User_Save_Icon);
-
-//        driver.findElement(User_Status_Button).click();
-//        driver.findElement(User_Save_Icon).click();
     }
 
+    public void User_Delete (){
+        waitForVisible(User_Delete_Button);
+        driver.findElement(User_List).click();
+        driver.findElement(User_Delete_Button).click();
+    }
     public void scrollAndClick(By locator){
         WebElement button = driver.findElement(locator);
 
@@ -391,110 +389,62 @@ public class Settings_Page  {
 
 
     public void Asserting_Store_Location_AddedSuccessfully (){
-        By popupMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitForVisible(popupMessage);
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(popupMessage));
-        WebElement msg=driver.findElement(popupMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified store locations!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified store locations!");
     }
     public void Asserting_Store_Location_EditedSuccessfully (){
-        By popupMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-        waitForVisible(popupMessage);
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement msg=driver.findElement(popupMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified store locations!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified store locations!");
     }
 
 
     public void Assert_Language_AddedSuccessfully (){
-        By PopupMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitForVisible(PopupMessage);
-        WebElement msg=driver.findElement(PopupMessage);
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopupMessage));
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified languages!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified languages!");
 
     }
     public void Asserting_Language_Edited_Successfully(){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified languages!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified languages!");
     }
     public void Asserting_Currency_Added_Successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified currencies!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified currencies!");
     }
     public void Asserting_Currency_edited_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified currencies!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified currencies!");
     }
     public void Asserting_Currency_deleted_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified currencies!");
+
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified currencies!");
     }
     public void Asserting_Stock_Added_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified stock statuses!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified stock statuses!");
     }
     public void Asserting_Stock_Edited_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified stock statuses!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified stock statuses!");
     }
     public void Asserting_Stock_Deleted_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified stock statuses!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified stock statuses!");
+    }
+    public void Asserting_Language_Deleted_successfully (){
+        Assert.assertTrue(successMessage().isDisplayed());
     }
     public void Asserting_User_Added_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified Users!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified Users!");
+    }
+
+    public void Asserting_User_deleted_successfully (){
+        Assert.assertTrue(successMessage().isDisplayed());
     }
     public void Asserting_UserGroup_Added_successfully (){
-        By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
-        waitForVisible(PopUpMessage);
-        WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified user groups!");
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified user groups!");
     }
 
     public void Asserting_API_Added_successfully () {
+
+        Assert.assertTrue(successMessage().isDisplayed(), "Success: You have modified APIs!");
+    }
+
+    private WebElement successMessage(){
         By PopUpMessage = By.xpath("//div[@class='alert alert-success alert-dismissible']");
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(PopUpMessage));
         waitForVisible(PopUpMessage);
         WebElement msg=driver.findElement(PopUpMessage);
-        Assert.assertTrue(msg.isDisplayed(), "Success: You have modified APIs!");
+        return msg;
     }
 }

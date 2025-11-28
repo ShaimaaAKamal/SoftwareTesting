@@ -20,7 +20,7 @@ public class ChangePassword extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         updatePassword = new ChangePassword_Page(driver);
         accountPage=new Account_Page(driver);
         home=new Home_Page(driver);

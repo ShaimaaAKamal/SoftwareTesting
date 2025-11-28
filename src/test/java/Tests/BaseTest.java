@@ -50,8 +50,9 @@ public class BaseTest {
 
     public void scrollIntoView(By locator) {
         WebElement element = driver.findElement(locator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
+
 
 //    public void waitForClickable(By locator) {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

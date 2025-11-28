@@ -15,7 +15,8 @@ public class Orders_Page {
     public By pageTitle=By.xpath("//h1[text()='Orders']");
     public By Sales = By.linkText("Sales");
     public By Orders = By.xpath("//a[text()='Orders']");
-    By deleteIcon= By.xpath("//button[@id='button-delete']");
+//    By deleteIcon= By.xpath("//button[@id='button-delete']");
+    By deleteIcon=By.cssSelector(".btn-danger");
     By printInvoiceBtn = By.id("button-invoice");
     By shippingBtn = By.id("button-shipping");
     By addNewBtn = By.cssSelector("a.btn.btn-primary > i.fa-plus");

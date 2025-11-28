@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class ReturnRequests_Page {
 
     WebDriver driver;
-    public By pageTitle= By.xpath("//h1[text()='Product Returns']");
+    public By pageTitle= By.xpath("//h1[text()='Returns']");
 
     By continueBtn=By.xpath("//a[@class='btn btn-primary']");
 

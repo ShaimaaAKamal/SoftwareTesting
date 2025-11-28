@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class Cart_Page {
@@ -14,6 +15,7 @@ public class Cart_Page {
     }
 
     // Locators //
+    public By pageTitle = By.xpath("//h1[contains(text(), 'Shopping Cart')]");
     By MyAccount_Icon = By.cssSelector(".fa-user");
     By Login_Icon = By.linkText("Login");
     By AddToCart_Button = By.xpath("//a[@title='Shopping Cart']");
@@ -24,12 +26,19 @@ public class Cart_Page {
    public By productCartIcon = By.xpath("//div[@id='content']//div[1]//div[1]//div[2]//form[1]//div[1]//button[1]");
 //By productCartIcon = By.xpath("(//h3[text()='Featured']/following::button[@aria-label='Add to Cart'])[1]");
     By Total_Cart_value = By.xpath("//td[@class=\"text-end\"]");
-    By Remove_Button=By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/form[1]/div[1]/button[2]");
+    By Remove_Button=By.xpath("(//a[@class='btn btn-danger'])[1]");
     By Modify_Quantity =By.name("quantity");
     public By Modify_Message = By.xpath("//div[@class='alert alert-success alert-dismissible']");
     By Update_Button = By.xpath("//i[@class=\"fa-solid fa-rotate\"]");
     public By OutOfStock_Message =By.xpath("//i[@class=\"fa-solid fa-circle-exclamation\"]");
    public By emptyCartMessage=By.xpath("//p[text()='Your shopping cart is empty!']");
+    By Navigate_To_Product_Page = By.xpath("(//tr//a[contains(@href, 'product_id')])[1]");
+    By Shopping_Cart_icon =By.xpath("//i[@class=\"fa-solid fa-cart-shopping\"]");
+    By Click_CheckOut_Button =By.xpath("//a[@class=\"btn btn-primary\"]");
+    By ClickOn_AnOptioned_Product = By.linkText("Canon EOS 5D");
+    By Select_Dropdown_Button = By.id("input-option-226");
+    By Select_Option = By.xpath("//option[@value=\"16\"]");
+    By Click_Product_AddToCartButton =By.id("button-cart");
 
     //  Actions //
     public void ClickAddToCartButton(){
@@ -81,6 +90,45 @@ public class Cart_Page {
         driver.findElement(Update_Button).click();
     }
 
+    public void NavigateToProductPage(){
+        scrollAndClick(Navigate_To_Product_Page);
+    }
+    public void ClickOnShoppingCartIcon(){
+        scrollAndClick(Shopping_Cart_icon);
+    }
+
+    public void scrollAndClick(By locator){
+        WebElement button = driver.findElement(locator);
+
+        // Scroll into view
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+
+        // Add small delay to ensure layout stabilizes
+        try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+        // Click using JS to bypass overlays
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+    }
+
+    public void ClickCheckOutButton(){
+        scrollAndClick(Click_CheckOut_Button);
+    }
+
+    public void ClickOnAnOptionedProduct(){
+        scrollAndClick(ClickOn_AnOptioned_Product);
+    }
+    public void SelectDropdownButton(){
+        WebElement dropDown= driver.findElement(Select_Dropdown_Button);
+        dropDown.click();
+        Select options=new Select(dropDown);
+        options.selectByVisibleText("Red");
+    }
+
+
+    public  void ClickProductAddToCartButton(){
+        scrollAndClick(Click_Product_AddToCartButton);
+    }
+
 
     // Assertion //
     public void assertSuccessMessageDisplay() {
@@ -100,5 +148,22 @@ public class Cart_Page {
         public void assertEmptyCartMessageDispaly(){
         Assert.assertTrue(driver.findElement(emptyCartMessage).isDisplayed());
     }
+
+    public void assertNavigateToProductPageFromCart(){
+        Assert.assertTrue(driver.getCurrentUrl().contains("product_id"),
+                "URL does NOT contain product_id!");    }
+
+
+    public void assertTotalDisplayTaxDetails(){
+        Assert.assertTrue(driver.findElement(By.xpath("//td[@colspan=\"4\"]")).isDisplayed());
+    }
+    public void assertOptionedProductAddedToCartSuccessfully(){
+        Assert.assertTrue(driver.findElement(By.xpath("//td[@class=\"text-start text-wrap\"]")).isDisplayed());
+    }
+    public void assertUserNavigateToCheckOutPage(){
+        Assert.assertTrue(driver.getCurrentUrl().contains("checkout"),
+                "URL does NOT contain checkout!");
+    }
+
 
 }

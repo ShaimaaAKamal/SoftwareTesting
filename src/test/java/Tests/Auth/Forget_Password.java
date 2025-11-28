@@ -16,7 +16,7 @@ public class Forget_Password extends BaseTest {
 
     @BeforeMethod
     public void preCondition(){
-        driver.get("http://localhost:8888/opencartDemo/");
+        driver.get("http://localhost:8888/opencart/");
         home=new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
@@ -50,7 +50,7 @@ public class Forget_Password extends BaseTest {
 
     @Test(priority = 0)
     public void sendForgetPasswordWithvalidEmail() {
-        forgetPassword.enterEmailAddress("temo@gmail.com");
+        forgetPassword.enterEmailAddress("tete@gmail.com");
         forgetPassword.clickContinue();
         waitForVisible(login.successForgetPasswordMessage);
         forgetPassword.assertSuccessMessage();
