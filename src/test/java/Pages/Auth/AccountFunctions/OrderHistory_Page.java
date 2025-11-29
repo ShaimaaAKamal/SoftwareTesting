@@ -2,6 +2,7 @@ package Pages.Auth.AccountFunctions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class OrderHistory_Page {
     WebDriver driver;
@@ -15,5 +16,9 @@ public class OrderHistory_Page {
 
     public void clickContinue(){
         driver.findElement(continueBtn).click();
+    }
+
+    public void assertInOrderHistoryPage(){
+        Assert.assertTrue(driver.findElement(pageTitle).isDisplayed());
     }
 }

@@ -14,6 +14,12 @@
             <class name="Tests.Auth.AccountFunctions.AffliateAccount"/>
             <class name="Tests.Auth.AccountFunctions.AddressBook"/>
             <class name="Tests.Auth.AccountFunctions.NewAddress"/>
+            <class name="Tests.Auth.AccountFunctions.OrderHistory"/>
+            <class name="Tests.Auth.AccountFunctions.Transcations"/>
+            <class name="Tests.Auth.AccountFunctions.ReturnRequests"/>
+            <class name="Tests.Auth.AccountFunctions.RewardPoints"/>
+            <class name="Tests.Auth.AccountFunctions.Downloads"/>
+            <class name="Tests.Auth.AccountFunctions.Subscriptions"/>
             <class name="Tests.Products.Single_Product"/>
             <class name="Tests.Auth.AccountFunctions.Wistlist"/>
             <class name="Tests.Cart"/>
