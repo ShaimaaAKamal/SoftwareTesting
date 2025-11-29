@@ -36,7 +36,7 @@ public class Cart extends BaseTest {
 
     @AfterMethod
     public void after(){
-        driver.get("http://localhost:8888/opencart/");
+//        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
         home.clickLogout();
     }

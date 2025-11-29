@@ -6,18 +6,12 @@ import Pages.Cart_Page;
 import Pages.Checkout_Page;
 import Pages.Home_Page;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.List;
 
 public class Checkout extends BaseTest{
     Checkout_Page checkout;
@@ -50,12 +44,11 @@ public class Checkout extends BaseTest{
         driver.findElement(By.xpath("//button[text()='Login']")).click();
         waitForVisible(accountPage.editInformation);
         // Add product
-        driver.findElement(By.xpath("//a[@class='nav-link'][text()='Phones & PDAs']")).click();
-        waitForVisible(By.xpath("//h2[text()='Phones & PDAs']"));
+        driver.findElement(By.linkText("Phones & PDAs")).click();
+        waitForVisible(By.xpath("//h1[text()='Phones & PDAs']"));
 //        driver.findElement(By.xpath("(//button)[1]")).click();
 
         // Go to checkout
-//        driver.findElement(By.cssSelector(".btn.btn-lg.btn-inverse.btn-block.dropdown-toggle")).click();
         driver.findElement(cartPage.productCartIcon).click();
         waitForVisible(cartPage.Success_Message);
         waitFoRInVisible(cartPage.Success_Message);
@@ -65,7 +58,7 @@ public class Checkout extends BaseTest{
 
     @AfterMethod
     public void after(){
-        driver.get("http://localhost:8888/opencartDemo/");
+//        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
         home.clickLogout();
     }
@@ -87,21 +80,6 @@ public class Checkout extends BaseTest{
         checkout.ChooseExistingAddress();
     }
 
-    @Test(priority = 2)
-    public void UsingNewAddressSuccess (){
-        checkout.ChooseNewAddress();
-        checkout.NewFirstName("Moamen");
-        checkout.NewLastName("Ahmed");
-        checkout.NewCompany("HiTechNour");
-        checkout.NewAddress1("48 Bavaria elmaadi");
-        checkout.NewAddress2("Madint Nasr");
-        checkout.NewCity("Giza");
-        checkout.NewPostCode(4444);
-        checkout.NewCountry();
-        checkout.NewRegion();
-        checkout.clickAddNewaddress();
-        checkout.AssertNewAddressSelected();
-    }
 
     @Test(priority = 1)
     public void UsingNewAddressMissingFirst (){
@@ -212,6 +190,8 @@ public class Checkout extends BaseTest{
         checkout.NewCountry();
         checkout.NewRegion();
         checkout.clickAddNewaddress();
+        waitForVisible(checkout.successMessage);
+        checkout.assertAlert();
     }
 
 

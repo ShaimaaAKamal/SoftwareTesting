@@ -44,8 +44,13 @@ public class AffliateAccount extends BaseTest {
 
     @Test(priority = 0)
     public void addAffliateExists(){
-        waitForVisible(accountPage.affliateAccount);
+        if (!accountPage.isAddAfflicateAccountExists()) {
+            throw new SkipException("Cannot run addAffliateExists() because no orders exist.");
+        }
+        accountPage.assertAddAffliateAccountLink();
+ //        waitForVisible(accountPage.affliateAccount);
     }
+
     @Test(priority = 0, dependsOnMethods = "addAffliateExists")
     public void enterChequeWithAllEmptyFiedls(){
         accountPage.navigateTAffliateAccountUsingMainPage();

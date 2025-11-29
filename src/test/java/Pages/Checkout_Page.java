@@ -39,7 +39,7 @@ public By chooseMethod = By.id("button-shipping-method");
     public By cityError=By.xpath("//div[@id='error-shipping-city']");
     public By address1Error=By.xpath("//div[@id=\"error-shipping-address-1\"]");
     public By countryError=By.xpath("//div[@id=\"error-shipping-country\"]");
-    By addNewADDRESS=By.xpath("/html[1]/body[1]/main[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/fieldset[1]/div[3]/form[1]/div[2]/button[1]");
+    By addNewADDRESS=By.xpath("//button[text()='Continue']");
     public By lastNameError=By.xpath("//div[@id=\"error-shipping-lastname\"]");
     public By addreessNotSelectedError=By.xpath("//div[@id=\"error-shipping-address\"]");
     public By regionError=By.xpath("//div[@id=\"error-shipping-zone\"]");
@@ -237,6 +237,10 @@ public By chooseMethod = By.id("button-shipping-method");
 
     public void AssertPaymentMethodError(){
         Assert.assertTrue(driver.findElement(errorMessage).isDisplayed());
+    }
+
+    public void assertAlert(){
+        Assert.assertTrue(driver.findElement(successMessage).isDisplayed());
     }
 
 }

@@ -2,6 +2,8 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class Home_Page {
     WebDriver driver;
@@ -16,7 +18,8 @@ public class Home_Page {
         this.driver=driver;
     }
     public void clickMyAccount(){
-        driver.findElement(myAccount).click();
+        scrollAndClick(myAccount);
+//        driver.findElement(myAccount).click();
     }
 
     public void clickRegitser(){
@@ -36,4 +39,21 @@ public class Home_Page {
 
     }
 
+    public void scrollAndClick(By locator){
+        WebElement button = driver.findElement(locator);
+
+        // Scroll into view
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+
+        // Add small delay to ensure layout stabilizes
+        try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+        // Click using JS to bypass overlays
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+    }
+
+    public boolean registerExists(){
+        boolean exist= !driver.findElements(registerLink).isEmpty();
+        return exist;
+    }
 }

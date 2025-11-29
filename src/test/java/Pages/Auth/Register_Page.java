@@ -87,4 +87,6 @@ public class Register_Page {
         String successMessage=driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText();
         Assert.assertEquals(successMessage,"Your Account Has Been Created!");
     }
+
+
 }

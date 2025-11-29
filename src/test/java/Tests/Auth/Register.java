@@ -18,6 +18,8 @@ public class Register extends BaseTest {
         driver.get("http://localhost:8888/opencart/");
         home =new Home_Page(driver);
         home.clickMyAccount();
+        if(!home.registerExists())
+            home.clickLogout();
         home.clickRegitser();
         register = new Register_Page(driver);
     }
@@ -97,8 +99,8 @@ public class Register extends BaseTest {
 
 
     //Register with valid data
-    @Test(priority = 2 ,  alwaysRun = true)
-    public void registerWithValidData()  {
+    @Test(priority = 2 )
+    public void registerWithValidData() throws InterruptedException {
         register.enterFirstName("alia");
         register.enterlastName("ahmed");
         register.enterMail();
@@ -112,7 +114,7 @@ public class Register extends BaseTest {
 
 
     @Test(priority = 1)
-    public void registerWithFirstNameExceedingMaxLength()  {
+    public void registerWithFirstNameExceedingMaxLength() throws InterruptedException {
         register.enterFirstName("Superduperultramegatasticwordddd");
         register.enterlastName("ahmed");
         register.enterMail();
@@ -123,8 +125,8 @@ public class Register extends BaseTest {
         register.asserTFirstNameError();
     }
 
-    @Test(priority = 1)
-    public void registerWithLastNameExceddingMaxLength() {
+    @Test(priority =1)
+    public void registerWithLastNameExceddingMaxLength() throws InterruptedException {
         register.enterFirstName("ahmed");
         register.enterlastName("Superduperultramegatasticwordddd");
         register.enterMail();

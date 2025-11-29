@@ -2,6 +2,7 @@ package Pages.Auth;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class Account_Page {
     WebDriver driver;
@@ -76,6 +77,10 @@ public class Account_Page {
         driver.findElement(editAccount).click();
     }
 
+    public boolean isAddAfflicateAccountExists(){
+       return !driver.findElements(affliateAccount).isEmpty();
+    }
+
     public void navigateToTranscationsUsingMainPage(){
         driver.findElement(transcations).click();
     }
@@ -117,4 +122,7 @@ public class Account_Page {
         return driver.findElement(editAffliate).isDisplayed();
     }
 
+    public void assertAddAffliateAccountLink(){
+        Assert.assertTrue(isAddAfflicateAccountExists());
+    }
 }

@@ -1,17 +1,12 @@
 package Tests.Auth.AccountFunctions;
 
-import Pages.Auth.AccountFunctions.AddressBook_Page;
-import Pages.Auth.AccountFunctions.NewAddress_Page;
 import Pages.Auth.Account_Page;
 import Pages.Auth.Login_Page;
 import Pages.Home_Page;
 import Pages.Wishlist_Page;
 import Tests.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class Wistlist extends BaseTest {
 
@@ -20,17 +15,20 @@ public class Wistlist extends BaseTest {
     Account_Page accountPage;
     Login_Page login;
 
-    @BeforeTest
-    public void beforeTest()  {
-        driver.get("http://localhost:8888/opencart/");
-        home=new Home_Page(driver);
-        accountPage=new Account_Page(driver);
-        home.clickMyAccount();
-        home.clickLogout();
-    }
+
+//    @BeforeClass
+//    public void beforeClass()  {
+//        driver.get("http://localhost:8888/opencart/");
+//        home=new Home_Page(driver);
+//        accountPage=new Account_Page(driver);
+//        home.clickMyAccount();
+//    }
+
     @BeforeMethod
     public void preCondition() {
         driver.get("http://localhost:8888/opencart/");
+        home=new Home_Page(driver);
+        accountPage=new Account_Page(driver);
         wishlist = new Wishlist_Page(driver);
         login=new Login_Page(driver);
         home.clickMyAccount();
@@ -60,25 +58,17 @@ public class Wistlist extends BaseTest {
         if(count > 1){
             wishlist.RemoveFromWishlistUsingIndex(1);
             Thread.sleep(1000);
-            System.out.println(wishlist.wishlistProductsCount());
             Assert.assertEquals(wishlist.wishlistProductsCount(),count-1);
         }
     }
 
-//    @Test(priority = 1)
-//    public void addWishlistProductToCart()  {
-//        int count= wishlist.wishlistProductsCount();
-//        if(count >= 1){
-//            wishlist.addWishlisProductToCarttUsingIndex(0);
-//            waitForVisible(wishlist.successMessage);
-//        }
-//    }
 
     @Test(priority = 2)
-    public void removeLastItemFromWishList(){
+    public void removeLastItemFromWishList() throws InterruptedException {
         int count= wishlist.wishlistProductsCount();
         if(count == 1){
             wishlist.RemoveFromWishlistUsingIndex(0);
+            Thread.sleep(1000);
             waitForVisible(wishlist.emptyMessage);
         }
     }

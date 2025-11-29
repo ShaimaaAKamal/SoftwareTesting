@@ -23,7 +23,26 @@ public class Account extends BaseTest {
     NewLetters_Page newsLetters;
     RewardPoint_Page rewardPoints;
     Downloads_Page downloads;
-    @BeforeTest
+//    @BeforeTest
+//    public void beforeTest(){
+//        home=new Home_Page(driver);
+//        login = new Login_Page(driver);
+//        accountPage=new Account_Page(driver);
+//        editAccount=new EditAccountInformation_Page(driver);
+//        changePassword=new ChangePassword_Page(driver);
+//        addressBook=new AddressBook_Page(driver);
+//        wishlist=new wishlist_Page(driver);
+//        orderHistory=new OrderHistory_Page(driver);
+//        subscriptions=new Subscriptions_Page(driver);
+//        downloads=new Downloads_Page(driver);
+//        rewardPoints=new RewardPoint_Page(driver);
+//        returns=new ReturnRequests_Page(driver);
+//        transcations=new Transcations_Page(driver);
+//        newsLetters=new NewLetters_Page(driver);
+//        account=new AffilateAccount_Page(driver);
+//        accountPage.logout();
+//    }
+    @BeforeClass
     public void beforeTest(){
         home=new Home_Page(driver);
         login = new Login_Page(driver);
@@ -170,7 +189,7 @@ public class Account extends BaseTest {
 
     @Test(priority = 0)
     public void navigateToAccountUsingMainPage(){
-        if(driver.findElement(accountPage.affliateAccount).isDisplayed()){
+        if(accountPage.isAddAfflicateAccountExists()){
             accountPage.navigateTAffliateAccountUsingMainPage();
         }
         else {
