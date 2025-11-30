@@ -16,6 +16,13 @@ public class BaseTest {
     public static WebDriver driver;
     public static ChromeOptions options;
     public WebDriverWait wait;
+    public String storeBaseUrl="http://localhost:8888/opencart/";
+    public String adminPanelBaseUrl="http://localhost:8888/opencart/myAdmin";
+    public String storeUserEmail="tete@gmail.com";
+    public String storeUserPassword="Test710@";
+    public String adminUsername="admin";
+    public String adminPassword="admin";
+
 
     @BeforeSuite
     public void setUp(){

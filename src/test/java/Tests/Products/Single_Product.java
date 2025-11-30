@@ -25,15 +25,15 @@ public class Single_Product extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home = new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
         login = new Login_Page(driver);
         account = new Account_Page(driver);
         singleProduct = new Single_Product_Page(driver);
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         waitForVisible(account.editInformation);
         account.clickLogo();

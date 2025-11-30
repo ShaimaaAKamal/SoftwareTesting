@@ -16,7 +16,7 @@ public class Forget_Password extends BaseTest {
 
     @BeforeMethod
     public void preCondition(){
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home=new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();

@@ -14,7 +14,7 @@ public class Login extends BaseTest {
     Home_Page home;
     @BeforeMethod
     public void preCondition(){
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home=new Home_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
@@ -84,8 +84,8 @@ public class Login extends BaseTest {
 
     @Test(priority = 1)
     public void loginWithvalidEmailAndvalidPassword() {
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         wait.until(ExpectedConditions.not(
                 ExpectedConditions.urlContains("route=account/login")

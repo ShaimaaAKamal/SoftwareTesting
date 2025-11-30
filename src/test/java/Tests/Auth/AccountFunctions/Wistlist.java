@@ -15,26 +15,17 @@ public class Wistlist extends BaseTest {
     Account_Page accountPage;
     Login_Page login;
 
-
-//    @BeforeClass
-//    public void beforeClass()  {
-//        driver.get("http://localhost:8888/opencart/");
-//        home=new Home_Page(driver);
-//        accountPage=new Account_Page(driver);
-//        home.clickMyAccount();
-//    }
-
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home=new Home_Page(driver);
         accountPage=new Account_Page(driver);
         wishlist = new Wishlist_Page(driver);
         login=new Login_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         waitForVisible(accountPage.editInformation);
         accountPage.navigateToWishlistUsingMainPage();

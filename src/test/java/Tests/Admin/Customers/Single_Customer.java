@@ -22,9 +22,9 @@ public class Single_Customer extends BaseTest {
         customersPage=new Customers_Page(driver);
         login=new Admin_Login_Page(driver);
         dashboard=new Dashboard_Page(driver);
-        driver.get("http://localhost:8888/opencart/myAdmin/");
-        login.enterUsername("admin");
-        login.enterPassword("admin");
+        driver.get(adminPanelBaseUrl);
+        login.enterUsername(adminUsername);
+        login.enterPassword(adminPassword);
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
         customersPage.ClickCustomersDropdown();

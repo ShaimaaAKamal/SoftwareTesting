@@ -28,9 +28,9 @@ public class Dashboard extends BaseTest {
         orders=new Orders_Page(driver);
         customers=new Customers_Page(driver);
         reports=new Reports_Page(driver);
-        driver.get("http://localhost:8888/opencart/myAdmin/");
-        login.enterUsername("admin");
-        login.enterPassword("admin");
+        driver.get(adminPanelBaseUrl);
+        login.enterUsername(adminUsername);
+        login.enterPassword(adminPassword);
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
     }

@@ -20,7 +20,7 @@ public class Cart extends BaseTest {
     Checkout_Page checkout;
     @BeforeMethod
     public void precondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         loginPage = new Login_Page(driver);
         cartPage = new Cart_Page(driver);
         account=new Account_Page(driver);
@@ -28,8 +28,8 @@ public class Cart extends BaseTest {
         checkout=new Checkout_Page(driver);
         cartPage.ClickMyAccountIcon();
         cartPage.ClickLoginIcon();
-        loginPage.enterEmail("tete@gmail.com");
-        loginPage.enterPassword("Test710@");
+        loginPage.enterEmail(storeUserEmail);
+        loginPage.enterPassword(storeUserPassword);
         loginPage.submitForm();
         waitForVisible(account.editInformation);
     }

@@ -30,7 +30,8 @@ public class Home_Page extends Base_Page{
     }
 
     public void clickLogout(){
-        driver.findElement(logoutLink).click();
+        scrollAndClick(logoutLink);
+//        driver.findElement(logoutLink).click();
     }
 
     public void clickAccountLink(){

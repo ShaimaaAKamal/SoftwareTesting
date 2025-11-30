@@ -15,7 +15,7 @@ public class Admin_Login extends BaseTest {
     Admin_Login_Page login;
     @BeforeMethod
     public void preCondition(){
-        driver.get("http://localhost:8888/opencart/myAdmin/");
+        driver.get(adminPanelBaseUrl);
         login = new Admin_Login_Page(driver);
     }
 

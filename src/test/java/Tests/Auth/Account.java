@@ -63,11 +63,11 @@ public class Account extends BaseTest {
     }
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home.clickMyAccount();
         home.clickLogin();
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         waitForVisible(accountPage.editInformation);
     }

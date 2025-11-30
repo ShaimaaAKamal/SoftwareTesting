@@ -18,15 +18,15 @@ public class Transcations extends BaseTest {
     Login_Page login;
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         transcation = new Transcations_Page(driver);
         accountPage=new Account_Page(driver);
         home=new Home_Page(driver);
         login=new Login_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         waitForVisible(accountPage.editInformation);
         accountPage.navigateToTranscationsUsingMainPage();

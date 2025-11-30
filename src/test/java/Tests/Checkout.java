@@ -34,13 +34,13 @@ public class Checkout extends BaseTest{
     @BeforeMethod
     public void preconditions ()
     {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         // Go to login page
         home.clickMyAccount();
         home.clickLogin();
         // Login
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         driver.findElement(By.xpath("//button[text()='Login']")).click();
         waitForVisible(accountPage.editInformation);
         // Add product

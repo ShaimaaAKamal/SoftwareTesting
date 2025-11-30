@@ -12,7 +12,7 @@ public class Logout extends BaseTest {
     @BeforeMethod
     public void preCondition(){
         home=new Home_Page(driver);
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         home.clickMyAccount();
     }
 

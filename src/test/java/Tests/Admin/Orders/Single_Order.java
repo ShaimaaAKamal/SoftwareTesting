@@ -28,9 +28,9 @@ public class Single_Order extends BaseTest {
         login = new Admin_Login_Page(driver);
         dashboard = new Dashboard_Page(driver);
         order = new Single_Order_Page(driver);
-        driver.get("http://localhost:8888/opencart/myAdmin/");
-        login.enterUsername("admin");
-        login.enterPassword("admin");
+        driver.get(adminPanelBaseUrl);
+        login.enterUsername(adminUsername);
+        login.enterPassword(adminPassword);
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
         orders.clickSales();

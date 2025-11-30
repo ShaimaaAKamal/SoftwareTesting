@@ -28,14 +28,14 @@ public class Single_Product extends BaseTest {
     public void Precondition() {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         settingsPage = new Settings_Page(driver);
-        driver.get("http://localhost:8888/opencart/myAdmin");
+        driver.get(adminPanelBaseUrl);
         products = new Products_Page(driver);
         singleProduct = new Single_Product_Page(driver);
         dashboard=new Dashboard_Page(driver);
 
         login=new Admin_Login_Page(driver);
-        login.enterUsername("admin");
-        login.enterPassword("admin");
+        login.enterUsername(adminUsername);
+        login.enterPassword(adminPassword);
         login.submitForm();
         wait.until(ExpectedConditions.urlContains("user_token"));
         products.openCatalog();

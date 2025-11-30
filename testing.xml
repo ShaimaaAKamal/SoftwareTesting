@@ -20,7 +20,9 @@
             <class name="Tests.Auth.AccountFunctions.RewardPoints"/>
             <class name="Tests.Auth.AccountFunctions.Downloads"/>
             <class name="Tests.Auth.AccountFunctions.Subscriptions"/>
+            <class name="Tests.Products.Product_List"/>
             <class name="Tests.Products.Single_Product"/>
+            <class name="Tests.Products.Search"/>
             <class name="Tests.Auth.AccountFunctions.Wistlist"/>
             <class name="Tests.Cart"/>
             <class name="Tests.Checkout"/>

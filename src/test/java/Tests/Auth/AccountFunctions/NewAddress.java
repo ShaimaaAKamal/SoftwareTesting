@@ -20,7 +20,7 @@ public class NewAddress extends BaseTest {
 
     @BeforeMethod
     public void preCondition() {
-        driver.get("http://localhost:8888/opencart/");
+        driver.get(storeBaseUrl);
         newAddress = new NewAddress_Page(driver);
         accountPage=new Account_Page(driver);
         addressBook=new AddressBook_Page(driver);
@@ -28,8 +28,8 @@ public class NewAddress extends BaseTest {
         login=new Login_Page(driver);
         home.clickMyAccount();
         home.clickLogin();
-        login.enterEmail("tete@gmail.com");
-        login.enterPassword("Test710@");
+        login.enterEmail(storeUserEmail);
+        login.enterPassword(storeUserPassword);
         login.submitForm();
         waitForVisible(accountPage.editInformation);
         accountPage.navigateToAddressBookUsingMainPage();
