@@ -42,5 +42,10 @@
             <class name="Tests.Admin.Orders.Orders"/>
         </classes>
     </test>
+    <test name="cucumberTest">
+        <classes>
+            <class name="CucumberTests.Runners.TestRunner"/>
+            </classes>
+    </test>
 </suite>
 
