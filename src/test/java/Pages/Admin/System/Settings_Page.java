@@ -1,5 +1,6 @@
 package Pages.Admin.System;
 
+import Pages.Base_Page;
 import Tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +12,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class Settings_Page  {
-    WebDriver driver;
+public class Settings_Page extends Base_Page {
     // Navigating to System/Localisation/Store_Location //
     public By System_Selecting = By.linkText("System");
     By Localization_Selecting = By.xpath("//a[text()='Localisation']");
@@ -141,7 +141,7 @@ public class Settings_Page  {
     }
 
     public Settings_Page(WebDriver parentDriver) {
-        driver = parentDriver;
+        super(parentDriver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 

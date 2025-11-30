@@ -6,12 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-public class Cart_Page {
-    WebDriver driver;
+public class Cart_Page extends Base_Page {
 
     // Constructor //
     public Cart_Page(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     // Locators //
@@ -42,16 +41,17 @@ public class Cart_Page {
 
     //  Actions //
     public void ClickAddToCartButton(){
-        WebElement button = driver.findElement(productCartIcon);
-
-        // Scroll into view
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-
-        // Add small delay to ensure layout stabilizes
-        try { Thread.sleep(300); } catch (InterruptedException e) {}
-
-        // Click using JS to bypass overlays
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        scrollAndClick(productCartIcon);
+//        WebElement button = driver.findElement(productCartIcon);
+//
+//        // Scroll into view
+//        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+//
+//        // Add small delay to ensure layout stabilizes
+//        try { Thread.sleep(300); } catch (InterruptedException e) {}
+//
+//        // Click using JS to bypass overlays
+//        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
     }
 
 
@@ -97,18 +97,7 @@ public class Cart_Page {
         scrollAndClick(Shopping_Cart_icon);
     }
 
-    public void scrollAndClick(By locator){
-        WebElement button = driver.findElement(locator);
 
-        // Scroll into view
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-
-        // Add small delay to ensure layout stabilizes
-        try { Thread.sleep(300); } catch (InterruptedException e) {}
-
-        // Click using JS to bypass overlays
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-    }
 
     public void ClickCheckOutButton(){
         scrollAndClick(Click_CheckOut_Button);
@@ -135,9 +124,6 @@ public class Cart_Page {
         Assert.assertTrue(driver.findElement(Success_Message).isDisplayed());
     }
 
-//    public void assertRemoveMessageDispaly(){
-//        Assert.assertTrue(driver.findElement(Remove_Message).isDisplayed());
-//    }
     public void assertModifyQuantityMessageDisplay(){
         Assert.assertTrue(driver.findElement((Modify_Message)).isDisplayed());
     }

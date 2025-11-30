@@ -1,34 +1,19 @@
 package Pages.Admin;
 
+import Pages.Base_Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Dashboard_Page {
-    WebDriver driver;
+public class Dashboard_Page extends Base_Page {
     public By logout = By.cssSelector("#nav-logout > a");
 
     public Dashboard_Page(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
 
     public void clickLogout(){
-//        driver.findElement(logout).click();
         scrollAndClick(logout);
     }
-
-    public void scrollAndClick(By locator){
-        WebElement button = driver.findElement(locator);
-
-        // Scroll into view
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-
-        // Add small delay to ensure layout stabilizes
-        try { Thread.sleep(300); } catch (InterruptedException e) {}
-
-        // Click using JS to bypass overlays
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-    }
-
 
 }

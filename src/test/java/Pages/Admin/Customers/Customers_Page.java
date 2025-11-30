@@ -1,5 +1,6 @@
 package Pages.Admin.Customers;
 
+import Pages.Base_Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,8 @@ import org.testng.Assert;
 import java.sql.Driver;
 import java.util.List;
 
-public class Customers_Page {
-    WebDriver driver;
+public class Customers_Page extends Base_Page {
 
-    // Constructor //
 
     // Locators //
     public By pageTitle=By.xpath("//h1[text()='Customers']");
@@ -30,20 +29,8 @@ public class Customers_Page {
     public By successMessage=By.xpath("//div[@class='alert alert-success alert-dismissible']");
     // Constructor //
     public Customers_Page(WebDriver driver) {
-        this.driver = driver;
-    }
 
-    public void scrollAndClick(By locator){
-        WebElement button = driver.findElement(locator);
-
-        // Scroll into view
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-
-        // Add small delay to ensure layout stabilizes
-        try { Thread.sleep(300); } catch (InterruptedException e) {}
-
-        // Click using JS to bypass overlays
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        super(driver);
     }
 
     //  Actions //

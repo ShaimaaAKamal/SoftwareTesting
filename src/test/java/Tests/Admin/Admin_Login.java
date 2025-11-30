@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Admin_Login extends BaseTest {
-    private static final Logger log = LoggerFactory.getLogger(Admin_Login.class);
     Admin_Login_Page login;
     @BeforeMethod
     public void preCondition(){

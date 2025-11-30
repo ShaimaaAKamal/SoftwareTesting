@@ -70,7 +70,6 @@ public class Single_Customer_Page {
     public void EnterEmail() {
         String mail=generateFakeEmail();
         driver.findElement(Email_Input).sendKeys(mail);
-//        driver.findElement(Email_Input).sendKeys(Email);
     }
 
     public void EnterPassword(String password) {
@@ -84,9 +83,7 @@ public class Single_Customer_Page {
     public void ClickOnSaveButton() {
         driver.findElement(Save_Button).click();
     }
-//    public void ClickOnBackButton(){
-//        driver.findElement(Back_Button).click();
-//    }
+
 
     public void ClickOnTransactionButton() {
         driver.findElement(Transaction_Button).click();

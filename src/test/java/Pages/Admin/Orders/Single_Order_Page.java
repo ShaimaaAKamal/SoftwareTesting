@@ -1,5 +1,6 @@
 package Pages.Admin.Orders;
 
+import Pages.Base_Page;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -7,8 +8,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class Single_Order_Page {
-    WebDriver driver;
+public class Single_Order_Page extends Base_Page {
 
     // ---------- BUTTONS ----------
     public By addOrderBtn = By.cssSelector("a[data-bs-original-title='Add New']");
@@ -88,7 +88,7 @@ public By addProductBtn =By.cssSelector("button[data-bs-target='#modal-product']
     public By successAlert = By.xpath("//div[@class='alert alert-success alert-dismissible']");
     public By errorAlert=By.cssSelector(".alert-danger");
     public Single_Order_Page(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
 
     public void openProductModel() {
@@ -228,18 +228,7 @@ public By addProductBtn =By.cssSelector("button[data-bs-target='#modal-product']
     }
 
     //Customer
-    public void scrollAndClick(By locator){
-        WebElement button = driver.findElement(locator);
 
-        // Scroll into view
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-
-        // Add small delay to ensure layout stabilizes
-        try { Thread.sleep(300); } catch (InterruptedException e) {}
-
-        // Click using JS to bypass overlays
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-    }
     public void saveCutomerData() {
         driver.findElement(saveCustomerBtn).click();
     }

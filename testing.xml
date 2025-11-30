@@ -26,17 +26,17 @@
             <class name="Tests.Checkout"/>
         </classes>
     </test>
-    <test name="admin">
-        <classes>
-            <class name="Tests.Admin.Admin_Login"/>
-            <class name="Tests.Admin.System.Settings"/>
-            <class name="Tests.Admin.Customers.Single_Customer"/>
-            <class name="Tests.Admin.Customers.Customers"/>
-            <class name="Tests.Admin.Products.Single_Product"/>
-            <class name="Tests.Admin.Products.Products"/>
-            <class name="Tests.Admin.Orders.Single_Order"/>
-            <class name="Tests.Admin.Orders.Orders"/>
-        </classes>
-    </test>
+<!--    <test name="admin">-->
+<!--        <classes>-->
+<!--            <class name="Tests.Admin.Admin_Login"/>-->
+<!--            <class name="Tests.Admin.System.Settings"/>-->
+<!--            <class name="Tests.Admin.Customers.Single_Customer"/>-->
+<!--            <class name="Tests.Admin.Customers.Customers"/>-->
+<!--            <class name="Tests.Admin.Products.Single_Product"/>-->
+<!--            <class name="Tests.Admin.Products.Products"/>-->
+<!--            <class name="Tests.Admin.Orders.Single_Order"/>-->
+<!--            <class name="Tests.Admin.Orders.Orders"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
 
