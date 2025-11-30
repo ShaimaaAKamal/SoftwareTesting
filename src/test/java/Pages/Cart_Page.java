@@ -38,20 +38,14 @@ public class Cart_Page extends Base_Page {
     By Select_Dropdown_Button = By.id("input-option-226");
     By Select_Option = By.xpath("//option[@value=\"16\"]");
     By Click_Product_AddToCartButton =By.id("button-cart");
-
+    By closeBtn=By.cssSelector(".btn-close");
     //  Actions //
+
+    public void close(){
+        scrollAndClick(closeBtn);
+    }
     public void ClickAddToCartButton(){
         scrollAndClick(productCartIcon);
-//        WebElement button = driver.findElement(productCartIcon);
-//
-//        // Scroll into view
-//        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-//
-//        // Add small delay to ensure layout stabilizes
-//        try { Thread.sleep(300); } catch (InterruptedException e) {}
-//
-//        // Click using JS to bypass overlays
-//        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
     }
 
 

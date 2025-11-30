@@ -3,6 +3,7 @@
 <suite name="Automation Suite" parallel="false">
     <test name="Store">
         <classes>
+            <class name="Tests.Home"/>
             <class name="Tests.Auth.Register"/>
             <class name="Tests.Auth.Logout"/>
             <class name="Tests.Auth.Forget_Password"/>

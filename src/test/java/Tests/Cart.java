@@ -36,7 +36,6 @@ public class Cart extends BaseTest {
 
     @AfterMethod
     public void after(){
-//        driver.get("http://localhost:8888/opencart/");
         home.clickMyAccount();
         home.clickLogout();
     }
@@ -66,6 +65,8 @@ public class Cart extends BaseTest {
         cartPage.ClickUpdateButton();
         waitForVisible(cartPage.OutOfStock_Message);
         cartPage.assertOutOfStockMessage();
+        cartPage.close();
+        waitForVisible(cartPage.OutOfStock_Message);
     }
 
     @Test(priority = 3)
@@ -89,7 +90,6 @@ public class Cart extends BaseTest {
             cartPage.ClickOnAnOptionedProduct();
             driver.findElement(By.xpath("//h1[text()='Canon EOS 5D']"));
             cartPage.SelectDropdownButton();
-//            cartPage.SelectOption();
             cartPage.ClickProductAddToCartButton();
             waitForVisible(cartPage.Success_Message);
             cartPage.ClickOnShoppingCartIcon();
