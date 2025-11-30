@@ -94,4 +94,8 @@ public class Customers_Page extends Base_Page {
                 "URL does NOT contain customer.form!");
     }
 
+    public void  assertInCustomersPage(){
+        Assert.assertEquals(driver.findElement(pageTitle).getText(),"Customers" );
+    }
+
 }
