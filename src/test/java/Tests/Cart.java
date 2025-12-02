@@ -11,7 +11,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static CucumberTests.stepDefinitions.Base.waitForInvisible;
 import static CucumberTests.stepDefinitions.Base.waitForVisible;
 
 
@@ -67,11 +66,11 @@ public class Cart extends BaseTest {
         cartPage.ModifyQuantity("200");
         cartPage.ClickUpdateButton();
         waitForVisible(cartPage.Modify_Message);
-        waitForInvisible(cartPage.Modify_Message);
+        waitFoRInVisible(cartPage.Modify_Message);
         waitForVisible(cartPage.OutOfStock_Message);
         cartPage.assertOutOfStockMessage();
         cartPage.close();
-        waitForInvisible(cartPage.OutOfStock_Message);
+        waitFoRInVisible(cartPage.OutOfStock_Message);
     }
 
     @Test(priority = 3)

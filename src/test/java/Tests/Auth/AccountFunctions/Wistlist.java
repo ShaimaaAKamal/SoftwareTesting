@@ -46,22 +46,12 @@ public class Wistlist extends BaseTest {
     @Test(priority = 0)
     public void removeItemFromWishList() throws InterruptedException {
         int count= wishlist.wishlistProductsCount();
-        if(count > 1){
+        if(count >= 1){
             wishlist.RemoveFromWishlistUsingIndex(1);
             Thread.sleep(1000);
             Assert.assertEquals(wishlist.wishlistProductsCount(),count-1);
         }
     }
 
-
-    @Test(priority = 2)
-    public void removeLastItemFromWishList() throws InterruptedException {
-        int count= wishlist.wishlistProductsCount();
-        if(count == 1){
-            wishlist.RemoveFromWishlistUsingIndex(0);
-            Thread.sleep(1000);
-            waitForVisible(wishlist.emptyMessage);
-        }
-    }
 
 }

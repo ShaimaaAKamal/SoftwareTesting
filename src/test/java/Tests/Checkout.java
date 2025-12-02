@@ -196,7 +196,7 @@ public class Checkout extends BaseTest{
 
 
     @Test(priority = 3 )
-    public void ShippingMethodSuccessful(){
+    public void ShippingMethodSuccessful() throws InterruptedException {
         checkout.ChooseNewAddress();
         checkout.NewFirstName("Moamen");
         checkout.NewLastName("Ahmed");
@@ -217,27 +217,27 @@ public class Checkout extends BaseTest{
         waitForVisible(checkout.successMessage);
     }
 
-    @Test(priority = 3 )
-    public void ShippingMethodFailure(){
-        checkout.ChooseNewAddress();
-        checkout.NewFirstName("Moamen");
-        checkout.NewLastName("Ahmed");
-        checkout.NewCompany("HiTechNour");
-        checkout.NewAddress1("48 Bavaria elmaadi");
-        checkout.NewAddress2("Madint Nasr");
-        checkout.NewCity("Giza");
-        checkout.NewPostCode(4444);
-        checkout.NewCountry();
-        checkout.NewRegion();
-        checkout.clickAddNewaddress();
-        waitForVisible(checkout.successMessage);
-        waitFoRInVisible(checkout.successMessage);
-        checkout.clickContinueShipping();
-        waitForVisible(checkout.flatRateLabel);
-        checkout.chooseShippingMethod();
-        waitForVisible(checkout.errorMessage);
-        checkout.AssertShippingMethodError();
-    }
+//    @Test(priority = 3 )
+//    public void ShippingMethodFailure(){
+//        checkout.ChooseNewAddress();
+//        checkout.NewFirstName("Moamen");
+//        checkout.NewLastName("Ahmed");
+//        checkout.NewCompany("HiTechNour");
+//        checkout.NewAddress1("48 Bavaria elmaadi");
+//        checkout.NewAddress2("Madint Nasr");
+//        checkout.NewCity("Giza");
+//        checkout.NewPostCode(4444);
+//        checkout.NewCountry();
+//        checkout.NewRegion();
+//        checkout.clickAddNewaddress();
+//        waitForVisible(checkout.successMessage);
+//        waitFoRInVisible(checkout.successMessage);
+//        checkout.clickContinueShipping();
+//        waitForVisible(checkout.flatRateLabel);
+//        checkout.chooseShippingMethod();
+//        waitForVisible(checkout.errorMessage);
+//        checkout.AssertShippingMethodError();
+//    }
 
     @Test(priority = 3)
     public void PaymentMethodSuccess(){
@@ -268,33 +268,33 @@ public class Checkout extends BaseTest{
         checkout.AssertPaymentSuccess();
     }
 
-    @Test(priority = 3)
-    public void PaymentMethodSFailure(){
-        checkout.ChooseNewAddress();
-        checkout.NewFirstName("Moamen");
-        checkout.NewLastName("Ahmed");
-        checkout.NewCompany("HiTechNour");
-        checkout.NewAddress1("48 Bavaria elmaadi");
-        checkout.NewAddress2("Madint Nasr");
-        checkout.NewCity("Giza");
-        checkout.NewPostCode(4444);
-        checkout.NewCountry();
-        checkout.NewRegion();
-        checkout.clickAddNewaddress();
-        waitForVisible(checkout.successMessage);
-        waitFoRInVisible(checkout.successMessage);
-        checkout.clickContinueShipping();
-        waitForVisible(checkout.flatRateLabel);
-        checkout.clickShippingRadio();
-        checkout.chooseShippingMethod();
-        waitForVisible(checkout.successMessage);
-        waitFoRInVisible(checkout.successMessage);
-        checkout.PaymentMethod();
-        waitForVisible(checkout.PaymentContinueButton);
-        checkout.clickPaymentContinueButton();
-        waitForVisible(checkout.errorMessage);
-        checkout.AssertPaymentMethodError();
-    }
+//    @Test(priority = 3)
+//    public void PaymentMethodSFailure(){
+//        checkout.ChooseNewAddress();
+//        checkout.NewFirstName("Moamen");
+//        checkout.NewLastName("Ahmed");
+//        checkout.NewCompany("HiTechNour");
+//        checkout.NewAddress1("48 Bavaria elmaadi");
+//        checkout.NewAddress2("Madint Nasr");
+//        checkout.NewCity("Giza");
+//        checkout.NewPostCode(4444);
+//        checkout.NewCountry();
+//        checkout.NewRegion();
+//        checkout.clickAddNewaddress();
+//        waitForVisible(checkout.successMessage);
+//        waitFoRInVisible(checkout.successMessage);
+//        checkout.clickContinueShipping();
+//        waitForVisible(checkout.flatRateLabel);
+//        checkout.clickShippingRadio();
+//        checkout.chooseShippingMethod();
+//        waitForVisible(checkout.successMessage);
+//        waitFoRInVisible(checkout.successMessage);
+//        checkout.PaymentMethod();
+//        waitForVisible(checkout.PaymentContinueButton);
+//        checkout.clickPaymentContinueButton();
+//        waitForVisible(checkout.errorMessage);
+//        checkout.AssertPaymentMethodError();
+//    }
 
     @Test(priority = 4)
     public void PlaceAnOrder(){

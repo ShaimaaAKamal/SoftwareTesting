@@ -1,5 +1,6 @@
 package Pages.Admin.Orders;
 
+import Pages.Base_Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +11,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orders_Page {
-    WebDriver driver;
+public class Orders_Page extends Base_Page {
     public By pageTitle=By.xpath("//h1[text()='Orders']");
     public By Sales = By.linkText("Sales");
     public By Orders = By.xpath("//a[text()='Orders']");
@@ -60,7 +60,7 @@ public class Orders_Page {
         return By.xpath("//table[contains(@class,'table-condensed')]//td[normalize-space()='" + day + "']");
     }
     public Orders_Page(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
 
     public void clickSales(){
@@ -83,7 +83,7 @@ public class Orders_Page {
     }
 
     public void clickFilterBtn(){
-        driver.findElement(filterBtn).click();
+        scrollAndClick(filterBtn);
     }
 
     public void enterOrderIdFilter(String Id){
