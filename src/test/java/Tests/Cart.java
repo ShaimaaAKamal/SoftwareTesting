@@ -11,6 +11,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static CucumberTests.stepDefinitions.Base.waitForInvisible;
+import static CucumberTests.stepDefinitions.Base.waitForVisible;
+
 
 public class Cart extends BaseTest {
     Login_Page loginPage;
@@ -63,10 +66,12 @@ public class Cart extends BaseTest {
         cartPage.AddToCart();
         cartPage.ModifyQuantity("200");
         cartPage.ClickUpdateButton();
+        waitForVisible(cartPage.Modify_Message);
+        waitForInvisible(cartPage.Modify_Message);
         waitForVisible(cartPage.OutOfStock_Message);
         cartPage.assertOutOfStockMessage();
         cartPage.close();
-        waitForVisible(cartPage.OutOfStock_Message);
+        waitForInvisible(cartPage.OutOfStock_Message);
     }
 
     @Test(priority = 3)
@@ -109,7 +114,15 @@ public class Cart extends BaseTest {
             cartPage.assertTotalDisplayTaxDetails();
         }
 
-        @Test(priority = 6)
+     @Test(priority = 6)
+     public void VerifyRegisteredUserRemoveProductsFromCart(){
+        cartPage.AddToCart();
+        cartPage.RemoveFromCart();
+        waitForVisible(cartPage.Success_Message);
+        cartPage.assertSuccessMessageDisplay();
+     }
+
+        @Test(priority = 7)
         public void VerifyRegisteredUserProceedToCheckOutSuccessfully(){
             account.clickLogo();
             waitForVisible(home.feature);
@@ -123,12 +136,6 @@ public class Cart extends BaseTest {
             cartPage.assertUserNavigateToCheckOutPage();
         }
 
-    @Test(priority = 7)
-    public void VerifyRegisteredUserRemoveProductsFromCart(){
-        cartPage.AddToCart();
-        cartPage.RemoveFromCart();
-        waitForVisible(cartPage.Success_Message);
-        cartPage.assertSuccessMessageDisplay();
-    }
+
 
 }

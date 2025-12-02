@@ -9,8 +9,8 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Checkout_Page {
-    WebDriver driver;
+public class Checkout_Page extends Base_Page {
+//    WebDriver driver;
     public By pageTitle=By.xpath("//h1[text()='Checkout']");
     public By Address_existing = By.id("input-shipping-existing");
     public By Address_bar = By.id("input-shipping-address");
@@ -50,7 +50,7 @@ public By chooseMethod = By.id("button-shipping-method");
     public By errorMessage=By.xpath("//div[@class='alert alert-danger alert-dismissible']");
     public By orderPlaced=By.xpath("//h1[text()='Your order has been placed!']");
     public Checkout_Page (WebDriver Driver) {
-        driver = Driver;
+       super(Driver);
     }
     public List<WebElement> getAllOrderStatusOptions() {
         WebElement dropdown = driver.findElement(Address_bar);
@@ -122,7 +122,8 @@ public By chooseMethod = By.id("button-shipping-method");
     }
 
     public void clickContinueShipping (){
-        driver.findElement(ShippingContinueButton).click();
+        scrollAndClick(ShippingContinueButton);
+//        driver.findElement(ShippingContinueButton).click();
     }
 
     public void chooseShippingMethod(){
@@ -147,7 +148,7 @@ public By chooseMethod = By.id("button-shipping-method");
     }
 
     public void Confirm (){
-        driver.findElement(Confirmation).click();
+        scrollAndClick(Confirmation);
     }
 
     public void clickAddNewaddress(){
