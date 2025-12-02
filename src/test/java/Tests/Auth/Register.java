@@ -92,8 +92,7 @@ public class Register extends BaseTest {
         register.enterMail();
         register.enterPassword("Test710@");
         register.submitForm();
-        wait.until(ExpectedConditions.urlContains("route=account/register"));
-
+//        wait.until(ExpectedConditions.urlContains("route=account/register"));
         register.assertInvalidRegister();
     }
 

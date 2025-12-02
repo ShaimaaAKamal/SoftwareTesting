@@ -60,5 +60,9 @@ public class BaseTest {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
+    public void waitUrlContains(String key){
+        wait.until(ExpectedConditions.urlContains(key));
+    }
+
 
 }
